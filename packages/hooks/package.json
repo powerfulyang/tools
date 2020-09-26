@@ -14,6 +14,9 @@
   "files": [
     "dist"
   ],
+  "browserslist": [
+    "last 2 versions"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/powerfulyang/tools.git"
