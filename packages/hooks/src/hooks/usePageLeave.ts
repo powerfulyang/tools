@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const usePageLeave = (onPageLeave: () => void, args = []) => {
+const usePageLeave = (onPageLeave: () => void) => {
   useEffect(() => {
     if (!onPageLeave) {
       return () => {};
@@ -17,7 +17,7 @@ const usePageLeave = (onPageLeave: () => void, args = []) => {
     return () => {
       document.removeEventListener('mouseout', handler);
     };
-  }, args);
+  }, [onPageLeave]);
 };
 
 export default usePageLeave;

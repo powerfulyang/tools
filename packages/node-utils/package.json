@@ -23,7 +23,6 @@
     "build": "rimraf dist && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
-    "watch:build": "rimraf dist && tsc -p tsconfig.json --watch",
     "prettier": "prettier \"src/**/*.ts\" --write",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "test": "jest"
@@ -37,6 +36,6 @@
     "sharp": "^0.26.1"
   },
   "dependencies": {
-    "@powerfulyang/utils": "^0.4.3"
+    "@powerfulyang/utils": "^0.4.4"
   }
 }

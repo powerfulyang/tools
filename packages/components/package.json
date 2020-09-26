@@ -1,6 +1,6 @@
 {
   "name": "@powerfulyang/components",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "description": "react-components",
   "author": "powerfulyang",
   "license": "MIT",
@@ -11,15 +11,12 @@
   "main": "dist/lib/index.js",
   "module": "dist/es/index.js",
   "style": "dist/es/index.css",
-  "sideEffects": [
-    "*.scss",
-    "*.css"
-  ],
+  "sideEffects": false,
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,jsx,tsx,ts,json,md}\"",
     "fix:style": "stylelint --fix \"src/**/*.scss\" --syntax scss",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
-    "build": "rimraf dist && rollup -c",
+    "build": "rimraf dist && cross-env NODE_ENV=production rollup -c",
     "build:dev": "rimraf dist && cross-env NODE_ENV=development rollup -c",
     "watch:build": "rimraf dist && cross-env NODE_ENV=development rollup -c --watch"
   },
@@ -37,9 +34,6 @@
   },
   "dependencies": {
     "@powerfulyang/hooks": "^0.0.1",
-    "@powerfulyang/utils": "^0.4.3",
-    "classnames": "^2.2.6",
-    "intersection-observer": "^0.11.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -55,6 +49,7 @@
     "@types/lodash-es": "^4.17.3",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
+    "autoprefixer": "^9.8.6",
     "cross-env": "^7.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
@@ -66,7 +61,6 @@
     "rollup-plugin-postcss": "^3.1.8",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.27.3",
-    "autoprefixer": "^9.8.6",
     "tailwindcss": "^1.8.10"
   }
 }

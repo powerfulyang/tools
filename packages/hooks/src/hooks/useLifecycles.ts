@@ -10,7 +10,7 @@ const useLifecycles = (mount: { (): void; (): void }, unmount?: { (): void; (): 
         unmount();
       }
     };
-  }, []);
+  }, [mount, unmount]);
 };
 
 export default useLifecycles;

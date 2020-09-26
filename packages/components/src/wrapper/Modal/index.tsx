@@ -1,6 +1,5 @@
 import React, { FC, HTMLAttributes, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import classNames from 'classnames';
 import './index.scss';
 
 const ModalWrap: FC<HTMLAttributes<HTMLDivElement>> = ({ className, children, ...restProps }) => {
@@ -23,7 +22,7 @@ const ModalWrap: FC<HTMLAttributes<HTMLDivElement>> = ({ className, children, ..
   }, [dialogNode]);
 
   return createPortal(
-    <div className={classNames('yang-utils-modal-wrap', className)} {...restProps}>
+    <div className="yang-utils-modal-wrap" {...restProps}>
       {children}
     </div>,
     dialogNode,

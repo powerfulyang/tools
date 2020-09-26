@@ -1,22 +1,20 @@
 {
   "name": "example",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "components-example",
   "main": "index.js",
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "private": true,
   "keywords": [],
   "author": "powerfulyang",
   "license": "ISC",
-  "dependencies": {
-    "@powerfulyang/components": "^0.5.7",
-    "react": "^16.13.1"
-  },
   "devDependencies": {
+    "@powerfulyang/components": "^0.5.8",
     "@storybook/react": "^6.0.22",
-    "ts-loader": "^8.0.4",
-    "typescript": "^4.0.3"
+    "react": "^16.13.1",
+    "ts-loader": "^8.0.4"
   }
 }

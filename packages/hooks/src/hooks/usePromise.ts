@@ -16,7 +16,7 @@ const usePromise: UsePromise = () => {
         };
         promise.then(onValue, onError);
       }),
-    [],
+    [isMounted],
   );
 };
 

@@ -9,8 +9,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import { __prod__ } from '@powerfulyang/utils';
 import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
-
 import pkg from './package.json';
+
 const pkgDeps = Array.from(Object.keys(pkg.dependencies));
 
 export default {

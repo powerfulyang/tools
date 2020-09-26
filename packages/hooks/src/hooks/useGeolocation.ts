@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import useMountedState from './useMountedState';
 
 export interface GeoLocationSensorState {
   loading: boolean;
@@ -25,39 +26,43 @@ const useGeolocation = (options?: PositionOptions): GeoLocationSensorState => {
     speed: null,
     timestamp: Date.now(),
   });
-  let mounted = true;
-  let watchId: any;
+  const isMounted = useMountedState();
 
-  const onEvent = (event: any) => {
-    if (mounted) {
-      setState({
-        loading: false,
-        accuracy: event.coords.accuracy,
-        altitude: event.coords.altitude,
-        altitudeAccuracy: event.coords.altitudeAccuracy,
-        heading: event.coords.heading,
-        latitude: event.coords.latitude,
-        longitude: event.coords.longitude,
-        speed: event.coords.speed,
-        timestamp: event.timestamp,
-      });
-    }
-  };
-  const onEventError = (error: PositionError) => {
-    if (mounted) {
-      setState((oldState) => ({ ...oldState, loading: false, error }));
-    }
-  };
-
+  const onEvent = useCallback(
+    (event: any) => {
+      if (isMounted()) {
+        setState({
+          loading: false,
+          accuracy: event.coords.accuracy,
+          altitude: event.coords.altitude,
+          altitudeAccuracy: event.coords.altitudeAccuracy,
+          heading: event.coords.heading,
+          latitude: event.coords.latitude,
+          longitude: event.coords.longitude,
+          speed: event.coords.speed,
+          timestamp: event.timestamp,
+        });
+      }
+    },
+    [isMounted],
+  );
+  const onEventError = useCallback(
+    (error: PositionError) => {
+      if (isMounted()) {
+        setState((oldState) => ({ ...oldState, loading: false, error }));
+      }
+    },
+    [isMounted],
+  );
+  const watchId = useRef(0);
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(onEvent, onEventError, options);
-    watchId = navigator.geolocation.watchPosition(onEvent, onEventError, options);
+    watchId.current = navigator.geolocation.watchPosition(onEvent, onEventError, options);
 
     return () => {
-      mounted = false;
-      navigator.geolocation.clearWatch(watchId);
+      navigator.geolocation.clearWatch(watchId.current);
     };
-  }, []);
+  }, [onEvent, onEventError, options]);
 
   return state;
 };

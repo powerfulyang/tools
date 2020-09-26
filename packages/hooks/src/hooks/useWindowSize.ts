@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-
+import { isClient } from '@powerfulyang/utils';
 import useRafState from './useRafState';
-import { isClient } from './util';
 
 const useWindowSize = (initialWidth = Infinity, initialHeight = Infinity) => {
   const [state, setState] = useRafState<{ width: number; height: number }>({
@@ -25,7 +24,7 @@ const useWindowSize = (initialWidth = Infinity, initialHeight = Infinity) => {
       };
     }
     return () => {};
-  }, []);
+  }, [setState]);
 
   return state;
 };

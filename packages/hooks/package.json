@@ -39,8 +39,10 @@
     "react": "^16.13.1"
   },
   "peerDependencies": {
-    "keyboardjs": "^2.6.4",
     "react": "^16.13.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@powerfulyang/utils": "^0.4.4",
+    "keyboardjs": "^2.6.4"
+  }
 }

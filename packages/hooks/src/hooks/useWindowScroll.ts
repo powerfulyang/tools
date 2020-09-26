@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { isClient } from './util';
+import { isClient } from '@powerfulyang/utils';
 
 import useRafState from './useRafState';
 
@@ -30,7 +30,7 @@ const useWindowScroll = (): State => {
     return () => {
       window.removeEventListener('scroll', handler);
     };
-  }, []);
+  }, [setState]);
 
   return state;
 };

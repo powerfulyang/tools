@@ -21,7 +21,7 @@ const useQuery: UseQueryParam = (param) => {
       window.removeEventListener('pushstate', onChange);
       window.removeEventListener('replacestate', onChange);
     };
-  }, []);
+  }, [param]);
 
   return value;
 };
