@@ -1,0 +1,15 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap --hoist",
+    "build": "lerna exec -- npm run build",
+    "prettier": "lerna exec -- npm run prettier",
+    "lint:utils": "lerna exec --scope @powerfulyang/utils -- npm run lint",
+    "lint:hooks": "lerna exec --scope @powerfulyang/hooks -- npm run lint",
+    "fix:components:style": "lerna exec --scope @powerfulyang/components -- npm run fix:style"
+  }
+}
