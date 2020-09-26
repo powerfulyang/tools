@@ -1,12 +1,12 @@
 import typescript from 'rollup-plugin-typescript2';
-import external from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import resolve from '@rollup/plugin-node-resolve';
 import url from '@rollup/plugin-url';
 import svgr from '@svgr/rollup';
-import autoprefixer from 'autoprefixer';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import commonjs from '@rollup/plugin-commonjs';
+import { __prod__ } from '@powerfulyang/utils';
 
 import pkg from './package.json';
 const pkgDeps = Array.from(Object.keys(pkg.dependencies));
@@ -26,21 +26,20 @@ export default {
     },
   ],
   plugins: [
-    external(),
     postcss({
-      plugins: [autoprefixer],
-      extract: './index.css',
-      minimize: true,
+      minimize: __prod__,
+      modules: true,
+      extract: 'index.css',
     }),
     url(),
     svgr(),
+    commonjs(),
     resolve(),
     typescript(),
     babel({
       exclude: 'node_modules/**',
-      runtimeHelpers: true,
     }),
-    process.env.NODE_ENV !== 'development' && terser(),
+    __prod__ && terser(),
   ],
   external: pkgDeps,
 };

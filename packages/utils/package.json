@@ -1,12 +1,18 @@
 {
   "name": "@powerfulyang/utils",
   "version": "0.4.3",
-  "description": "my utils",
-  "main": "dist/main",
-  "module": "dist/module",
-  "repository": "https://github.com/powerfulyang/utils",
+  "description": "common utils",
+  "main": "dist/main/index.js",
+  "module": "dist/module/index.js",
+  "sideEffects": false,
+  "author": {
+    "name": "powerfulyang"
+  },
+  "repository": "https://github.com/powerfulyang/tools",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "utils"
+  ],
   "files": [
     "dist"
   ],
@@ -14,6 +20,7 @@
     "build": "rimraf dist && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
+    "watch:build": "rimraf dist && tsc -p tsconfig.json --watch",
     "prettier": "prettier \"src/**/*.ts\" --write",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "test": "jest"
@@ -23,18 +30,8 @@
   },
   "devDependencies": {
     "@powerfulyang/lint": "^0.0.1",
-    "@types/jest": "^26.0.14",
-    "@types/node": "^14.11.2",
     "@types/sharp": "^0.26.0",
-    "jest": "^26.4.2",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.1.2",
-    "rimraf": "^3.0.2",
-    "sharp": "^0.26.1",
-    "ts-jest": "^26.4.0",
-    "typescript": "^4.0.3"
+    "sharp": "^0.26.1"
   },
-  "dependencies": {
-    "rimraf": "^3.0.2"
-  }
+  "dependencies": {}
 }
