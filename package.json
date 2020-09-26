@@ -6,10 +6,13 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
-    "build": "lerna exec -- npm run build",
-    "prettier": "lerna exec -- npm run prettier",
-    "lint:utils": "lerna exec --scope @powerfulyang/utils -- npm run lint",
-    "lint:hooks": "lerna exec --scope @powerfulyang/hooks -- npm run lint",
+    "build": "lerna exec --ignore example -- npm run build",
+    "prettier": "lerna exec --ignore example -- npm run prettier",
+    "lint": "lerna exec --ignore example -- npm run lint",
+    "watch:hooks": "lerna exec --scope @powerfulyang/hooks -- npm run watch:build",
+    "watch:utils": "lerna exec --scope @powerfulyang/utils -- npm run watch:build",
+    "watch:components": "lerna exec --scope @powerfulyang/components -- npm run watch:build",
+    "watch:example": "lerna exec --scope example -- npm run storybook",
     "fix:components:style": "lerna exec --scope @powerfulyang/components -- npm run fix:style"
   }
 }

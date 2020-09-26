@@ -6,45 +6,38 @@
     "react-hooks"
   ],
   "author": "powerfulyang <i@powerfulyang.com>",
-  "homepage": "https://github.com/powerfulyang/hooks#readme",
+  "homepage": "https://github.com/powerfulyang/tools",
   "license": "MIT",
-  "main": "dist",
+  "main": "dist/main/index.js",
+  "module": "dist/module/index.js",
+  "sideEffects": false,
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npm.taobao.org/"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/powerfulyang/hooks.git"
+    "url": "git+https://github.com/powerfulyang/tools.git"
   },
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.json",
+    "build": "rimraf dist && run-p build:*",
+    "build:main": "tsc -p tsconfig.json",
+    "build:module": "tsc -p tsconfig.module.json",
+    "watch:build": "tsc -p tsconfig.json --watch",
     "prettier": "prettier \"src/**/*.ts\" --write",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./src"
   },
   "bugs": {
-    "url": "https://github.com/powerfulyang/hooks/issues"
+    "url": "https://github.com/powerfulyang/tools/issues"
   },
   "devDependencies": {
     "@powerfulyang/lint": "^0.0.1",
     "@types/keyboardjs": "^2.5.0",
-    "@types/node": "^14.11.2",
     "@types/react": "^16.9.49",
-    "eslint": "^7.9.0",
-    "eslint-plugin-react-hooks": "^4.1.2",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.1.2",
-    "react": "^16.13.1",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.0.3"
+    "react": "^16.13.1"
   },
   "peerDependencies": {
     "keyboardjs": "^2.6.4",
     "react": "^16.13.1"
   },
-  "dependencies": {
-    "rimraf": "^3.0.2"
-  }
+  "dependencies": {}
 }

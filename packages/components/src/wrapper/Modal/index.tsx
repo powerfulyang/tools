@@ -5,9 +5,9 @@ import './index.scss';
 
 const ModalWrap: FC<HTMLAttributes<HTMLDivElement>> = ({ className, children, ...restProps }) => {
   const dialogNode = useMemo(() => {
-    const dialogNode = document.createElement('div');
-    document.body.appendChild(dialogNode);
-    return dialogNode;
+    const dialogNode2 = document.createElement('div');
+    document.body.appendChild(dialogNode2);
+    return dialogNode2;
   }, []);
   const originalOverflowCallback = useRef('');
 
@@ -17,7 +17,6 @@ const ModalWrap: FC<HTMLAttributes<HTMLDivElement>> = ({ className, children, ..
     style.overflow = 'hidden';
 
     return () => {
-      const { style } = document.body;
       style.overflow = originalOverflowCallback.current;
       document.body.removeChild(dialogNode);
     };
@@ -27,7 +26,7 @@ const ModalWrap: FC<HTMLAttributes<HTMLDivElement>> = ({ className, children, ..
     <div className={classNames('yang-utils-modal-wrap', className)} {...restProps}>
       {children}
     </div>,
-    dialogNode
+    dialogNode,
   );
 };
 

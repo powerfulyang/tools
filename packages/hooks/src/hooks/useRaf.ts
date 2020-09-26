@@ -9,6 +9,7 @@ const useRaf = (ms: number = 1e12, delay: number = 0): number => {
     let timerStop: NodeJS.Timeout;
     let start: number;
     function loop() {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       raf = requestAnimationFrame(onFrame);
     }
     function onFrame() {
