@@ -11,7 +11,7 @@
   "author": "powerfulyang",
   "license": "ISC",
   "dependencies": {
-    "@powerfulyang/components": "0.5.7",
+    "@powerfulyang/components": "^0.5.7",
     "react": "^16.13.1"
   },
   "devDependencies": {

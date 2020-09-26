@@ -1,2 +1,7 @@
 node_modules
 .idea
+src/constants/
+src/context/
+src/enum/
+src/utils/
+tailwind.js

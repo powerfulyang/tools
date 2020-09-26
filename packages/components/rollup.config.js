@@ -7,6 +7,8 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import { __prod__ } from '@powerfulyang/utils';
+import autoprefixer from 'autoprefixer';
+import tailwindcss from 'tailwindcss';
 
 import pkg from './package.json';
 const pkgDeps = Array.from(Object.keys(pkg.dependencies));
@@ -27,18 +29,17 @@ export default {
   ],
   plugins: [
     postcss({
+      plugins: [autoprefixer(), tailwindcss('./tailwind.js')],
       minimize: __prod__,
       modules: true,
       extract: 'index.css',
     }),
     url(),
     svgr(),
-    commonjs(),
     resolve(),
+    commonjs({ include: 'node_modules/**' }),
     typescript(),
-    babel({
-      exclude: 'node_modules/**',
-    }),
+    babel(),
     __prod__ && terser(),
   ],
   external: pkgDeps,
