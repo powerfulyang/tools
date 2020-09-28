@@ -5,14 +5,20 @@
   "main": "index.js",
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build": "build-storybook",
+    "prettier": "prettier \"stories/**/*.tsx\" --write",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./stories"
   },
   "private": true,
   "keywords": [],
   "author": "powerfulyang",
   "license": "ISC",
+  "dependencies": {
+    "react": "^16.13.1",
+    "@powerfulyang/components": "^0.5.8"
+  },
   "devDependencies": {
-    "@powerfulyang/components": "^0.5.8",
+    "@powerfulyang/lint": "^0.0.1",
     "@storybook/react": "^6.0.22",
     "react": "^16.13.1",
     "ts-loader": "^8.0.4"

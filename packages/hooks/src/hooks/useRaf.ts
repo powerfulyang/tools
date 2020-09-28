@@ -1,15 +1,14 @@
-import { useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 const useRaf = (ms: number = 1e12, delay: number = 0): number => {
   const [elapsed, set] = useState<number>(0);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     let raf: number;
-    // eslint-disable-next-line no-undef
     let timerStop: NodeJS.Timeout;
     let start: number;
     function loop() {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       raf = requestAnimationFrame(onFrame);
     }
     function onFrame() {

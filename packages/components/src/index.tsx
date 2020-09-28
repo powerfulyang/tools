@@ -1,3 +1,5 @@
 import './index.scss';
 
-export { PhotoSlider } from './components/PhotoSlider';
+export * from './assets/icons';
+export * from './components';
+export * from './wrapper/MarkdownWrap';

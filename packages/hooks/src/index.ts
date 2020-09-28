@@ -14,3 +14,8 @@ export { default as useWindowSize } from './hooks/useWindowSize';
 export { default as useRendersCount } from './hooks/useRendersCount';
 export { default as useHash } from './hooks/useHash';
 export { default as useKeyboardJs } from './hooks/useKeyboardJs';
+export { default as usePortal } from './hooks/usePortal';
+export * from './hooks/useImmer';
+export * from './hooks/useIsomorphicLayoutEffect';
+export * from './hooks/useMeasure';
+export * from './hooks/useIntersection';

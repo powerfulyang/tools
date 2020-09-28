@@ -1,3 +1,5 @@
+import sharp from 'sharp';
+
 const SAMPLE_SIZE = 32;
 
 function initSQRT(N: number) {
@@ -47,8 +49,6 @@ function applyDCT(f: any[], size: number) {
 const LOW_SIZE = 8;
 
 export async function pHash(image: Buffer) {
-  // eslint-disable-next-line global-require
-  const sharp = require('sharp');
   const data = await sharp(image)
     .greyscale()
     .resize(SAMPLE_SIZE, SAMPLE_SIZE, { fit: 'fill' })
