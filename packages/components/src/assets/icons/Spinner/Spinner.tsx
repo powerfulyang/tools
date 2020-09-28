@@ -1,9 +1,9 @@
 import React from 'react';
-import './Spinner.scss';
+import styles from './Spinner.scss';
 
-function Spinner() {
+export function Spinner() {
   return (
-    <div className="PhotoView__Spinner">
+    <div className={styles.Spinner}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 32 32"
@@ -20,5 +20,3 @@ function Spinner() {
     </div>
   );
 }
-
-export default Spinner;

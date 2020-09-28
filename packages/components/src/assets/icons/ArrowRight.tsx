@@ -1,6 +1,6 @@
 import React, { SVGProps } from 'react';
 
-function ArrowRight(props: SVGProps<SVGSVGElement>) {
+export function ArrowRight(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       version="1.1"
@@ -15,5 +15,3 @@ function ArrowRight(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default ArrowRight;

@@ -89,7 +89,10 @@ module.exports = {
     // Use function hoisting to improve code readability
     'no-use-before-define': [0],
     // Makes no sense to allow type inferrence for expression parameters, but require typing the response
-    '@typescript-eslint/no-use-before-define': [1],
+    '@typescript-eslint/no-use-before-define': [
+      'error',
+      { functions: false, classes: true, variables: true, typedefs: true },
+    ],
     '@typescript-eslint/explicit-function-return-type': [
       'off',
       { allowTypedFunctionExpressions: true },
@@ -130,4 +133,8 @@ module.exports = {
     polyfills: ['fetch', 'Promise', 'URL', 'object-assign'],
   },
   parserOptions,
+  globals: {
+    JSX: true,
+    NodeJS: true,
+  },
 };

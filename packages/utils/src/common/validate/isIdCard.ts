@@ -58,7 +58,6 @@ export const isIdCard = (sId: string): boolean => {
   let sum = 0;
   const weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
   const codes = '10X98765432';
-  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < sId.length - 1; i++) {
     sum += Number(sId[i]) * weights[i];
   }

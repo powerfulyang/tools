@@ -1,6 +1,6 @@
 import React, { SVGProps } from 'react';
 
-function Close(props: SVGProps<SVGSVGElement>) {
+export function Close(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       version="1.1"
@@ -17,5 +17,3 @@ function Close(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export default Close;
