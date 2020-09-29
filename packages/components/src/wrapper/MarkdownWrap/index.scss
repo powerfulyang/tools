@@ -1,0 +1,41 @@
+.markdown_body {
+  .heading1 {
+    @apply relative block h-auto p-2 font-bold text-center text-black border border-black border-solid;
+    &::before {
+      top:-0.4rem;
+      left: -0.4rem;
+      content: ' ';
+      @apply absolute block float-left w-11/12 h-px border-t border-black border-solid;
+    }
+
+    .prefix {
+      display: block;
+      width: 3px;
+      height: 3px;
+      margin: 0 0 0 5%;
+      overflow: hidden;
+      line-height: 3px;
+      background-color: #000;
+      box-shadow: 3px 0 #000, 0 3px #000, -3px 0 #000, 0 -3px #000;
+    }
+    .content {
+      @apply block text-2xl font-bold pl-10 pr-10;
+    }
+    .suffix {
+      display: block;
+      width: 3px;
+      height: 3px;
+      margin: 0 0 0 95%;
+      overflow: hidden;
+      line-height: 3px;
+      background-color: #000;
+      box-shadow: 3px 0 #000, 0 3px #000, -3px 0 #000, 0 -3px #000;
+    }
+    &::after {
+      right: -0.4rem;
+      bottom: -0.4rem;
+      content: ' ';
+      @apply absolute block w-11/12 h-px border-b border-black border-solid;
+    }
+  }
+}

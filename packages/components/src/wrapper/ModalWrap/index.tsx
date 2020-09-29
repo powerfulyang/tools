@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import './index.scss';
 import { useEffectOnce, usePortal } from '@powerfulyang/hooks';
 import { __dev__ } from '@powerfulyang/utils';
 
