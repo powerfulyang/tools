@@ -19,7 +19,20 @@ module.exports = {
     'at-rule-no-unknown': [
       true,
       {
-        ignoreAtRules: ['function', 'if', 'each', 'include', 'mixin', 'extend'],
+        ignoreAtRules: [
+          'function',
+          'if',
+          'each',
+          'include',
+          'mixin',
+          'extend',
+          'apply',
+          'tailwind',
+          'components',
+          'utilities',
+          'screen',
+          'layer',
+        ],
       },
     ],
   },

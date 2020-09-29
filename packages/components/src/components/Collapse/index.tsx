@@ -42,10 +42,11 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(function Collapse(props
     animateOpacity = true,
     onAnimationStart,
     onAnimationEnd,
-    duration = 200,
-    easing = 'ease',
+    duration,
+    easing,
     startingHeight = 0,
     endingHeight = 'auto',
+    as: Component = 'div',
     ...rest
   } = props;
   return (
@@ -57,11 +58,8 @@ export const Collapse = forwardRef<CollapseProps, 'div'>(function Collapse(props
       applyInlineTransitions={false}
       onAnimationStart={onAnimationStart}
       onAnimationEnd={onAnimationEnd}
-      style={{
-        transition: `height ${duration}ms ${easing},opacity ${duration}ms ${easing},transform ${duration}ms ${easing}`,
-      }}
     >
-      <div ref={ref} {...rest} />
+      <Component ref={ref} {...rest} />
     </AnimateHeight>
   );
 });
