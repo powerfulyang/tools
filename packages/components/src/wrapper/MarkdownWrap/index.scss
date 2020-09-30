@@ -2,7 +2,7 @@
   .heading1 {
     @apply relative block h-auto p-2 font-bold text-center text-black border border-black border-solid;
     &::before {
-      top:-0.4rem;
+      top: -0.4rem;
       left: -0.4rem;
       content: ' ';
       @apply absolute block float-left w-11/12 h-px border-t border-black border-solid;
@@ -19,7 +19,7 @@
       box-shadow: 3px 0 #000, 0 3px #000, -3px 0 #000, 0 -3px #000;
     }
     .content {
-      @apply block text-2xl font-bold pl-10 pr-10;
+      @apply block pl-10 pr-10 text-3xl font-semibold;
     }
     .suffix {
       display: block;
@@ -37,5 +37,30 @@
       content: ' ';
       @apply absolute block w-11/12 h-px border-b border-black border-solid;
     }
+  }
+
+  // blockquote
+  .blockquote {
+    @apply p-4 bg-gray-300 border-l-4 border-blue-600;
+  }
+
+  // list
+  .list_even {
+    list-style-type: square;
+    @apply ml-6;
+  }
+  .list_odd {
+    list-style-type: circle;
+    @extend .list_even;
+  }
+  .list_ordered {
+    list-style-type: none;
+    @extend .list_even;
+  }
+
+  // table
+  .table {
+    border-color: grey;
+    border-width: 1px;
   }
 }
