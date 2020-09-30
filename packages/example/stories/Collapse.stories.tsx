@@ -10,7 +10,7 @@ export const CollapseExample = () => {
   };
   return (
     <>
-      <button className="lg:-m-64" type="button" onClick={handleToggle}>
+      <button type="button" onClick={handleToggle}>
         toggle
       </button>
       <Collapse className="bg-gray-400" isOpen={show}>

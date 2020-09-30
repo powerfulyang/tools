@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Code, Heading } from './MarkdownElement';
+import { BlockQuote, Code, Heading, Link, List, ListItem, Table } from './MarkdownElement';
 import styles from './index.scss';
 
 export type MarkdownWrapProps = {
@@ -14,6 +14,11 @@ export const MarkdownWrap: FC<MarkdownWrapProps> = ({ source }) => {
       renderers={{
         code: Code,
         heading: Heading,
+        link: Link,
+        blockquote: BlockQuote,
+        list: List,
+        listItem: ListItem,
+        table: Table,
       }}
     />
   );

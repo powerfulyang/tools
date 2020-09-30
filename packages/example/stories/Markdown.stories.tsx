@@ -31,15 +31,14 @@ export const MarkdownExample = () => {
     '\n' +
     '***粗斜体*** ___粗斜体___\n' +
     '\n' +
-    '> 即更长的单词或短语的缩写形式，前提是开启识别HTML标签时，已默认开启\n' +
-    '\n' +
     '### 引用 Blockquotes\n' +
     '\n' +
     '> 引用文本 Blockquotes\n' +
+    '# 引用标题' +
     '\n' +
-    '### 锚点与链接 Links\n' +
+    '\n' +
+    '### 链接 Links\n' +
     '[普通链接](https://www.mdeditor.com/)\n' +
-    '[普通链接带标题](https://www.mdeditor.com/ "普通链接带标题")\n' +
     '直接链接：<https://www.mdeditor.com>\n' +
     '图片加链接 (Image + Link)：\n' +
     '\n' +
@@ -53,12 +52,6 @@ export const MarkdownExample = () => {
     '- 列表一\n' +
     '- 列表二\n' +
     '- 列表三\n' +
-    '\n' +
-    '#### 无序列表（星号）Unordered Lists (*)\n' +
-    '\n' +
-    '* 列表一\n' +
-    '* 列表二\n' +
-    '* 列表三\n' +
     '\n' +
     '#### 无序列表（加号和嵌套）Unordered Lists (+)\n' +
     '+ 列表一\n' +
@@ -95,14 +88,16 @@ export const MarkdownExample = () => {
     '\n' +
     '----\n' +
     '\n' +
-    '#### 特殊符号 HTML Entities Codes\n' +
-    '\n' +
-    '&copy; &  &uml; &trade; &iexcl; &pound;\n' +
-    '&amp; &lt; &gt; &yen; &euro; &reg; &plusmn; &para; &sect; &brvbar; &macr; &laquo; &middot;\n' +
-    '\n' +
-    'X&sup2; Y&sup3; &frac34; &frac14;  &times;  &divide;   &raquo;\n' +
-    '\n' +
-    '18&ordm;C  &quot;  &apos;\n' +
+    '#### 代码块 Codes\n' +
+    '```java\n' +
+    '// FileName: HelloWorld.java\n' +
+    'public class HelloWorld {\n' +
+    '  // Java 入口程序，程序从此入口\n' +
+    '  public static void main(String[] args) {\n' +
+    '    System.out.println("Hello,World!"); // 向控制台打印一条语句\n' +
+    '  }\n' +
+    '}\n' +
+    '```' +
     '\n' +
     '#### 反斜杠 Escape\n' +
     '\n' +
