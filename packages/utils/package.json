@@ -23,7 +23,7 @@
     "build": "rimraf dist && run-p build:*",
     "build:main": "tsc -p tsconfig.main.json",
     "build:module": "tsc -p tsconfig.module.json",
-    "watch:build": "rimraf dist && tsc -p tsconfig.json --watch",
+    "watch:build": "rimraf dist && tsc -p tsconfig.main.json --watch",
     "prettier": "prettier \"src/**/*.ts\" --write",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "test": "jest"

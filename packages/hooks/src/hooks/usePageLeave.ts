@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { fromEvent } from 'rxjs';
 
 export const usePageLeave = (onPageLeave: () => void) => {
   useEffect(() => {
@@ -13,9 +14,10 @@ export const usePageLeave = (onPageLeave: () => void) => {
       }
     };
 
-    document.addEventListener('mouseout', handler);
+    const source = fromEvent(document, 'mouseout');
+    const subscribe = source.subscribe(<any>handler);
     return () => {
-      document.removeEventListener('mouseout', handler);
+      subscribe.unsubscribe();
     };
   }, [onPageLeave]);
 };

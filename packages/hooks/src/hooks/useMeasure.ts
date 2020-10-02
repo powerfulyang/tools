@@ -52,5 +52,5 @@ const useClientMeasure = <E extends HTMLElement = HTMLElement>(): UseMeasureResu
 const useMeasureMock: typeof useClientMeasure = () => [() => {}, defaultState];
 
 export const useMeasure = () => {
-  return isClient && !!(<any>window).ResizeObserver ? useClientMeasure : useMeasureMock;
+  return isClient && 'ResizeObserver' in <any>window ? useClientMeasure : useMeasureMock;
 };

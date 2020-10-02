@@ -1,4 +1,5 @@
-import { RefObject, useEffect, useState } from 'react';
+import { RefObject, useEffect } from 'react';
+import { useImmer } from './useImmer';
 
 export const useIntersection = (
   ref: RefObject<HTMLElement>,
@@ -7,7 +8,7 @@ export const useIntersection = (
   const [
     intersectionObserverEntry,
     setIntersectionObserverEntry,
-  ] = useState<IntersectionObserverEntry | null>(null);
+  ] = useImmer<IntersectionObserverEntry | null>(null);
 
   useEffect(() => {
     if (ref.current && typeof IntersectionObserver === 'function') {
@@ -24,7 +25,14 @@ export const useIntersection = (
       };
     }
     return () => {};
-  }, [options.threshold, options.root, options.rootMargin, ref, options]);
+  }, [
+    options.threshold,
+    options.root,
+    options.rootMargin,
+    ref,
+    options,
+    setIntersectionObserverEntry,
+  ]);
 
   return intersectionObserverEntry;
 };

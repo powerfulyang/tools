@@ -1,14 +1,14 @@
 import { produce } from 'immer';
 import { useCallback, useState } from 'react';
-import { isObject } from '@powerfulyang/utils/src';
+import { ReturnTypedFunction, VoidFunction, isFunction } from '@powerfulyang/utils';
 
-export function useImmer<T = any>(initialValue: T | (() => T)) {
+export function useImmer<T = any>(initialValue: T | ReturnTypedFunction<never, T>) {
   const [val, updateValue] = useState<T>(initialValue);
 
   return [
     val,
-    useCallback((updater: T | ((args: T) => void)) => {
-      if (isObject(updater)) {
+    useCallback((updater: T | VoidFunction<T>) => {
+      if (!isFunction(updater)) {
         return updateValue(<T>updater);
       }
       return updateValue(produce(<any>updater));

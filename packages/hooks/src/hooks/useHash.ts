@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { useLifecycles } from './useLifecycles';
 import { useImmer } from './useImmer';
+import { useEffectOnce } from './useEffectOnce';
 
 /**
  * read and write url hash, response to url hash change
@@ -12,14 +12,12 @@ export const useHash = () => {
     setHash(window.location.hash);
   }, [setHash]);
 
-  useLifecycles(
-    () => {
-      window.addEventListener('hashchange', onHashChange);
-    },
-    () => {
+  useEffectOnce(() => {
+    window.addEventListener('hashchange', onHashChange);
+    return () => {
       window.removeEventListener('hashchange', onHashChange);
-    },
-  );
+    };
+  });
 
   const _setHash = useCallback(
     (newHash: string) => {
