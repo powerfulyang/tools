@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import useMountedState from './useMountedState';
+import { useCallback, useEffect, useRef } from 'react';
+import { useMountedState } from './useMountedState';
+import { useImmer } from './useImmer';
 
 export interface GeoLocationSensorState {
   loading: boolean;
@@ -15,7 +16,7 @@ export interface GeoLocationSensorState {
 }
 
 const useGeolocation = (options?: PositionOptions): GeoLocationSensorState => {
-  const [state, setState] = useState<GeoLocationSensorState>({
+  const [state, setState] = useImmer<GeoLocationSensorState>({
     loading: true,
     accuracy: null,
     altitude: null,
@@ -44,15 +45,18 @@ const useGeolocation = (options?: PositionOptions): GeoLocationSensorState => {
         });
       }
     },
-    [isMounted],
+    [isMounted, setState],
   );
   const onEventError = useCallback(
     (error: PositionError) => {
       if (isMounted()) {
-        setState((oldState) => ({ ...oldState, loading: false, error }));
+        setState((draft) => {
+          draft.loading = false;
+          draft.error = error;
+        });
       }
     },
-    [isMounted],
+    [isMounted, setState],
   );
   const watchId = useRef(0);
   useEffect(() => {

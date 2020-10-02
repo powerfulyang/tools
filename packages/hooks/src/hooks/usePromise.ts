@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
-import useMountedState from './useMountedState';
+import { useMountedState } from './useMountedState';
 
 export type UsePromise = () => <T>(promise: Promise<T>) => Promise<T>;
 
-const usePromise: UsePromise = () => {
+export const usePromise: UsePromise = () => {
   const isMounted = useMountedState();
   return useCallback(
     (promise: Promise<any>) =>
@@ -19,5 +19,3 @@ const usePromise: UsePromise = () => {
     [isMounted],
   );
 };
-
-export default usePromise;

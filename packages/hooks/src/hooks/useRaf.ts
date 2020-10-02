@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
-const useRaf = (ms: number = 1e12, delay: number = 0): number => {
+export const useRaf = (ms: number = 1e12, delay: number = 0): number => {
   const [elapsed, set] = useState<number>(0);
 
   useIsomorphicLayoutEffect(() => {
@@ -36,5 +36,3 @@ const useRaf = (ms: number = 1e12, delay: number = 0): number => {
 
   return elapsed;
 };
-
-export default useRaf;

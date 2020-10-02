@@ -15,7 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "react": "^16.13.1",
-    "@powerfulyang/components": "^0.5.8"
+    "@powerfulyang/components": "^0.5.8",
+    "@powerfulyang/hooks": "^0.0.1",
+    "@powerfulyang/utils": "^0.4.4"
   },
   "devDependencies": {
     "@powerfulyang/lint": "^0.0.1",

@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import useEffectOnce from './useEffectOnce';
+import { useEffectOnce } from './useEffectOnce';
 
-const useKeyboardJs = (combination: string | string[]) => {
+export const useKeyboardJs = (combination: string | string[]) => {
   const [state, set] = useState<[boolean, null | KeyboardEvent]>([false, null]);
   const [keyboardJs, setKeyboardJs] = useState<any>(null);
 
   useEffectOnce(() => {
-    // @ts-ignore
     import('keyboardjs').then((k) => setKeyboardJs(k.default || k));
   });
 
@@ -26,5 +25,3 @@ const useKeyboardJs = (combination: string | string[]) => {
 
   return state;
 };
-
-export default useKeyboardJs;

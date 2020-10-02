@@ -4,7 +4,6 @@ import '@powerfulyang/components/dist/es/index.css';
 
 export const CollapseExample = () => {
   const [show, setShow] = React.useState(false);
-
   const handleToggle = () => {
     setShow(!show);
   };
@@ -13,7 +12,7 @@ export const CollapseExample = () => {
       <button type="button" onClick={handleToggle}>
         toggle
       </button>
-      <Collapse className="bg-gray-400" isOpen={show}>
+      <Collapse isOpen={show}>
         Cross-Origin Resource Sharing (CORS) is a mechanism that uses additional HTTP headers to
         tell browsers to give a web application running at one origin, access to selected resources
         from a different origin. A web application executes a cross-origin HTTP request when it

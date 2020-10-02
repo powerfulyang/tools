@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import { isClient } from '@powerfulyang/utils';
-
-import useRafState from './useRafState';
+import { useRafState } from './useRafState';
 
 export interface State {
   x: number;
   y: number;
 }
 
-const useWindowScroll = (): State => {
+export const useWindowScroll = (): State => {
   const [state, setState] = useRafState<State>({
     x: isClient ? window.pageXOffset : 0,
     y: isClient ? window.pageYOffset : 0,
@@ -34,5 +33,3 @@ const useWindowScroll = (): State => {
 
   return state;
 };
-
-export default useWindowScroll;

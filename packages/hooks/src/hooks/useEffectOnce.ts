@@ -1,7 +1,7 @@
 import { EffectCallback, useEffect } from 'react';
+import { useFixed } from './useFixed';
 
-const useEffectOnce = (effect: EffectCallback) => {
-  useEffect(effect, [effect]);
+export const useEffectOnce = (effect: EffectCallback) => {
+  const effectRef = useFixed(effect);
+  useEffect(effectRef, [effectRef]);
 };
-
-export default useEffectOnce;

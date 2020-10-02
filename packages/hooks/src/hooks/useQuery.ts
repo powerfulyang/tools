@@ -4,7 +4,7 @@ const getValue = (search: string, param: string) => new URLSearchParams(search).
 
 export type UseQueryParam = (param: string) => string | null;
 
-const useQuery: UseQueryParam = (param) => {
+const useClientQuery: UseQueryParam = (param) => {
   const [value, setValue] = useState<string | null>(() => getValue(window.location.search, param));
 
   useEffect(() => {
@@ -28,4 +28,4 @@ const useQuery: UseQueryParam = (param) => {
 
 const useSearchParamServer = () => null;
 
-export default typeof window === 'object' ? useQuery : useSearchParamServer;
+export default typeof window === 'object' ? useClientQuery : useSearchParamServer;

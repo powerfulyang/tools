@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const usePageLeave = (onPageLeave: () => void) => {
+export const usePageLeave = (onPageLeave: () => void) => {
   useEffect(() => {
     if (!onPageLeave) {
       return () => {};
@@ -19,5 +19,3 @@ const usePageLeave = (onPageLeave: () => void) => {
     };
   }, [onPageLeave]);
 };
-
-export default usePageLeave;
