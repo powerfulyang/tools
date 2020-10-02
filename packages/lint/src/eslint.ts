@@ -11,7 +11,7 @@ let parserOptions: {
   project: './tsconfig.json',
 };
 
-if (!fs.existsSync(path.join(process.env.PWD || '.', './tsconfig.json'))) {
+if (!fs.existsSync(path.join(process.cwd(), './tsconfig.json'))) {
   parserOptions = {
     tsconfigRootDir: __dirname,
     project: './tsconfig.json',
@@ -117,7 +117,7 @@ module.exports = {
     'implicit-arrow-linebreak': 0,
     'operator-linebreak': 0,
     'eslint-comments/no-unlimited-disable': 0,
-    'no-param-reassign': 2,
+    'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['draft'] }],
     'space-before-function-paren': 0,
     'import/extensions': 0,
     '@typescript-eslint/naming-convention': 0,

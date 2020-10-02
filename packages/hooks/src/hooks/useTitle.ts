@@ -6,7 +6,7 @@ export interface UseTitleOptions {
 const DEFAULT_USE_TITLE_OPTIONS: UseTitleOptions = {
   restoreOnUnmount: false,
 };
-function useTitle(title: string, options: UseTitleOptions = DEFAULT_USE_TITLE_OPTIONS) {
+export function useTitle(title: string, options: UseTitleOptions = DEFAULT_USE_TITLE_OPTIONS) {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = title;
@@ -18,5 +18,3 @@ function useTitle(title: string, options: UseTitleOptions = DEFAULT_USE_TITLE_OP
     return () => {};
   }, [options, title]);
 }
-
-export default useTitle;

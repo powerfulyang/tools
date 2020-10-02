@@ -1,15 +1,16 @@
-import { useState, useCallback } from 'react';
-import useLifecycles from './useLifecycles';
+import { useCallback } from 'react';
+import { useLifecycles } from './useLifecycles';
+import { useImmer } from './useImmer';
 
 /**
  * read and write url hash, response to url hash change
  */
-const useHash = () => {
-  const [hash, setHash] = useState(() => window.location.hash);
+export const useHash = () => {
+  const [hash, setHash] = useImmer(() => window.location.hash);
 
   const onHashChange = useCallback(() => {
     setHash(window.location.hash);
-  }, []);
+  }, [setHash]);
 
   useLifecycles(
     () => {
@@ -31,5 +32,3 @@ const useHash = () => {
 
   return [hash, _setHash] as const;
 };
-
-export default useHash;

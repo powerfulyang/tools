@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useLifecycles = (mount: { (): void; (): void }, unmount?: { (): void; (): void }) => {
+export const useLifecycles = (mount: { (): void; (): void }, unmount?: { (): void; (): void }) => {
   useEffect(() => {
     if (mount) {
       mount();
@@ -12,5 +12,3 @@ const useLifecycles = (mount: { (): void; (): void }, unmount?: { (): void; (): 
     };
   }, [mount, unmount]);
 };
-
-export default useLifecycles;

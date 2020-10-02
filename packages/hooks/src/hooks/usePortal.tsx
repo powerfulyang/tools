@@ -7,7 +7,7 @@ interface PortalProps {
   container?: HTMLElement | (() => HTMLElement);
 }
 
-function usePortal(props: PortalProps = {}) {
+export function usePortal(props: PortalProps = {}) {
   const { id, container } = props;
   const rootElemRef = useRef<Element | HTMLElement | null>(isClient ? document.body : null);
 
@@ -30,5 +30,3 @@ function usePortal(props: PortalProps = {}) {
 
   return { target: rootElemRef.current, Portal };
 }
-
-export default usePortal;

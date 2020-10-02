@@ -34,8 +34,9 @@ describe('test assertion', () => {
   });
 
   test('is object', () => {
-    expect(isObject([])).toBeFalsy();
+    expect(isObject([])).toBeTruthy();
     expect(isObject({})).toBeTruthy();
+    expect(isObject(function () {})).toBeTruthy();
   });
 
   test('is empty', () => {

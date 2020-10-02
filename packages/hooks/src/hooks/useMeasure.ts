@@ -23,7 +23,7 @@ const defaultState: UseMeasureRect = {
   right: 0,
 };
 
-const useMeasure = <E extends HTMLElement = HTMLElement>(): UseMeasureResult<E> => {
+const useClientMeasure = <E extends HTMLElement = HTMLElement>(): UseMeasureResult<E> => {
   const [element, ref] = useState<E | null>(null);
   const [rect, setRect] = useState<UseMeasureRect>(defaultState);
 
@@ -49,6 +49,8 @@ const useMeasure = <E extends HTMLElement = HTMLElement>(): UseMeasureResult<E> 
   return [ref, rect];
 };
 
-const useMeasureMock: typeof useMeasure = () => [() => {}, defaultState];
+const useMeasureMock: typeof useClientMeasure = () => [() => {}, defaultState];
 
-export default isClient && !!(<any>window).ResizeObserver ? useMeasure : useMeasureMock;
+export const useMeasure = () => {
+  return isClient && !!(<any>window).ResizeObserver ? useClientMeasure : useMeasureMock;
+};
