@@ -22,7 +22,8 @@
     "url": "git+https://github.com/powerfulyang/tools.git"
   },
   "scripts": {
-    "build": "rimraf dist && run-p build:*",
+    "build": "rimraf dist && run-s build:*",
+    "build:init": "node ./init.js",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
     "watch:build": "tsc -p tsconfig.json --watch",

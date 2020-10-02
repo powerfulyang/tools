@@ -1,4 +1,12 @@
-export type CommonFunction<T = any> = (...args: any[]) => T;
-export type PromiseFunction<T = any> = (...args: any[]) => Promise<T>;
-export type ConstructorFunction<T = any, P = any> = new (...args: P[]) => T;
-export type VoidFunction = (...args: any[]) => void;
+/**
+ * P parameters type; R return type;
+ */
+export type ReturnTypedFunction<P = any, R = any> = (...args: P[]) => R;
+/**
+ * P constructor parameters type; I instance type;
+ */
+export type ConstructorFunction<P = any, I = any> = new (...args: P[]) => I;
+/**
+ * P parameters type;
+ */
+export type VoidFunction<P = any> = ReturnTypedFunction<P, void>;

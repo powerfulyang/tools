@@ -1,6 +1,6 @@
-import { CommonFunction } from '../../types';
+import { ReturnTypedFunction } from '../../types';
 
-export const Memoize = (hashFunction?: CommonFunction): MethodDecorator => {
+export const Memoize = (hashFunction?: ReturnTypedFunction): MethodDecorator => {
   return (
     _target: Object,
     _propertyKey: string | symbol,
@@ -19,8 +19,8 @@ export const Memoize = (hashFunction?: CommonFunction): MethodDecorator => {
 let counter = 0;
 function getNewFunction(
   originalMethod: VoidFunction,
-  hashFunction?: CommonFunction,
-): CommonFunction {
+  hashFunction?: ReturnTypedFunction,
+): ReturnTypedFunction {
   const identifier = ++counter;
   // The function returned here gets called instead of originalMethod.
   return function Func(this: any, ...args: any[]) {

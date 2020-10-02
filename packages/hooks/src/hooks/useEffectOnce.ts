@@ -1,7 +1,8 @@
-import { EffectCallback, useEffect } from 'react';
+import { EffectCallback } from 'react';
 import { useFixed } from './useFixed';
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 export const useEffectOnce = (effect: EffectCallback) => {
   const effectRef = useFixed(effect);
-  useEffect(effectRef, [effectRef]);
+  useIsomorphicLayoutEffect(effectRef, [effectRef]);
 };
