@@ -3,7 +3,7 @@
   "npmClientArgs": [
     "--sass-binary-site=http://npm.taobao.org/mirrors/node-sass"
   ],
-  "packages": ["packages/*"],
+  "packages": ["packages/*", "project/*"],
   "command": {
     "publish": {
       "npmClient": "npm",
