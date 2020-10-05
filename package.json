@@ -15,6 +15,7 @@
     "build:hooks": "lerna exec --scope @powerfulyang/hooks -- npm run build",
     "watch:utils": "lerna exec --scope @powerfulyang/utils -- npm run watch:build",
     "build:utils": "lerna exec --scope @powerfulyang/utils -- npm run build",
+    "build:lint": "lerna exec --scope @powerfulyang/lint -- npm run build",
     "watch:components": "lerna exec --scope @powerfulyang/components -- npm run watch:build",
     "watch:example": "lerna exec --scope example -- npm run storybook",
     "fix:components:style": "lerna exec --scope @powerfulyang/components -- npm run fix:style",

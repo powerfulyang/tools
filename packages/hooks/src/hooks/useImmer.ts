@@ -2,7 +2,7 @@ import { produce } from 'immer';
 import { useCallback, useState } from 'react';
 import { ReturnTypedFunction, VoidFunction, isFunction } from '@powerfulyang/utils';
 
-export function useImmer<T = any>(initialValue: T | ReturnTypedFunction<never, T>) {
+export function useImmer<T = any>(initialValue: T | ReturnTypedFunction<T>) {
   const [val, updateValue] = useState<T>(initialValue);
 
   return [
