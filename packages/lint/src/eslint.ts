@@ -124,6 +124,7 @@ module.exports = {
     'no-underscore-dangle': 0,
     'no-plusplus': 0,
     '@typescript-eslint/no-unused-expressions': 0,
+    'no-await-in-loop': 0,
   },
   settings: {
     // support import modules from TypeScript files in JavaScript files

@@ -1,4 +1,5 @@
 export * from './hooks/useEffectOnce';
+export * from './hooks/useEventCallback';
 export * from './hooks/useFavicon';
 export * from './hooks/useFixed';
 export * from './hooks/useGeolocation';
