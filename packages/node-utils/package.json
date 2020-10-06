@@ -34,8 +34,5 @@
     "@powerfulyang/lint": "^0.2.0",
     "@types/sharp": "^0.26.0",
     "sharp": "^0.26.1"
-  },
-  "dependencies": {
-    "@powerfulyang/utils": "^0.7.0"
   }
 }
