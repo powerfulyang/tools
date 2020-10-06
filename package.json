@@ -6,8 +6,8 @@
     "husky": "^4.3.0"
   },
   "scripts": {
-    "to-publish": "lerna publish --no-private",
-    "bootstrap": "lerna bootstrap --hoist",
+    "to-publish": "lerna publish --no-private --no-git-tag-version",
+    "install": "lerna bootstrap",
     "build": "lerna exec --ignore example -- npm run build",
     "prettier": "lerna exec -- npm run prettier",
     "lint": "lerna exec -- npm run lint",
