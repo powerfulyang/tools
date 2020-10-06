@@ -14,14 +14,14 @@
   "author": "powerfulyang",
   "license": "ISC",
   "dependencies": {
-    "@powerfulyang/components": "^0.7.0",
-    "@powerfulyang/hooks": "^0.2.0",
-    "@powerfulyang/utils": "^0.7.0",
+    "@powerfulyang/components": "^0.7.1",
+    "@powerfulyang/hooks": "^0.2.1",
+    "@powerfulyang/utils": "^0.7.1",
     "react": "^16.13.1",
     "rxjs": "^6.6.3"
   },
   "devDependencies": {
-    "@powerfulyang/lint": "^0.2.0",
+    "@powerfulyang/lint": "^0.2.1",
     "@storybook/react": "^6.0.22",
     "react": "^16.13.1",
     "ts-loader": "^8.0.4"
