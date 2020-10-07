@@ -1,6 +1,5 @@
 import React from 'react';
 import { Collapse } from '@powerfulyang/components';
-import '@powerfulyang/components/dist/es/index.css';
 
 export const CollapseExample = () => {
   const [show, setShow] = React.useState(false);

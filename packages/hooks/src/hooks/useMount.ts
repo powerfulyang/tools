@@ -1,4 +1,4 @@
-import { VoidFunction } from '@powerfulyang/utils/src';
+import { VoidFunction } from '@powerfulyang/utils';
 import { useEffectOnce } from './useEffectOnce';
 
 export const useMount = (effect: VoidFunction) => {
