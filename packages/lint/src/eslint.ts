@@ -125,6 +125,7 @@ module.exports = {
     'no-plusplus': 0,
     '@typescript-eslint/no-unused-expressions': 0,
     'no-await-in-loop': 0,
+    'class-methods-use-this': 0,
   },
   settings: {
     // support import modules from TypeScript files in JavaScript files

@@ -7,8 +7,8 @@
   },
   "scripts": {
     "to-publish": "lerna publish --no-private --no-git-tag-version",
-    "install": "lerna bootstrap",
-    "build": "lerna exec --ignore example -- npm run build",
+    "install": "lerna bootstrap --hoist",
+    "build": "lerna exec --ignore example --ignore *powerfulyang.com -- npm run build",
     "prettier": "lerna exec -- npm run prettier",
     "lint": "lerna exec -- npm run lint",
     "watch:hooks": "lerna exec --scope @powerfulyang/hooks -- npm run watch:build",

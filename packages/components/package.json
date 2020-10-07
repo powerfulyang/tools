@@ -11,7 +11,9 @@
   "main": "dist/lib/index.js",
   "module": "dist/es/index.js",
   "style": "dist/es/index.css",
-  "sideEffects": false,
+  "sideEffects": [
+    "src/mojs/CustomShape/initialize.ts"
+  ],
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,jsx,tsx,ts,json,md}\"",
     "fix:style": "stylelint --fix \"src/**/*.scss\" --syntax scss",
@@ -28,6 +30,7 @@
     "react-dom": "16.13.1"
   },
   "dependencies": {
+    "@mojs/core": "^0.288.2",
     "@powerfulyang/hooks": "^0.2.1",
     "@powerfulyang/utils": "^0.7.1",
     "formik": "^2.1.5",
@@ -35,7 +38,8 @@
     "react-animate-height": "^2.0.23",
     "react-dom": "^16.13.1",
     "react-markdown": "^4.3.1",
-    "react-syntax-highlighter": "^13.5.3"
+    "react-syntax-highlighter": "^13.5.3",
+    "rxjs": "^6.6.3"
   },
   "devDependencies": {
     "@powerfulyang/lint": "^0.2.1",
@@ -48,6 +52,7 @@
     "@types/enzyme": "^3.10.7",
     "@types/lodash-es": "^4.17.3",
     "@types/react-dom": "^16.9.8",
+    "@types/react-syntax-highlighter": "^11.0.5",
     "autoprefixer": "^9.8.6",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
