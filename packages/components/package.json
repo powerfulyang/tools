@@ -11,9 +11,7 @@
   "main": "dist/lib/index.js",
   "module": "dist/es/index.js",
   "style": "dist/es/index.css",
-  "sideEffects": [
-    "src/mojs/CustomShape/initialize.ts"
-  ],
+  "sideEffects": false,
   "scripts": {
     "prettier": "prettier --write \"src/**/*.{js,jsx,tsx,ts,json,md}\"",
     "fix:style": "stylelint --fix \"src/**/*.scss\" --syntax scss",
