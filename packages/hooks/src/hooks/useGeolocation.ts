@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { useMountedState } from './useMountedState';
+import { useEffect } from 'react';
+import { Observable, Subscriber } from 'rxjs';
 import { useImmer } from './useImmer';
 
 export interface GeoLocationSensorState {
@@ -15,7 +15,7 @@ export interface GeoLocationSensorState {
   error?: Error | PositionError;
 }
 
-const useGeolocation = (options?: PositionOptions): GeoLocationSensorState => {
+export const useGeolocation = (options?: PositionOptions): GeoLocationSensorState => {
   const [state, setState] = useImmer<GeoLocationSensorState>({
     loading: true,
     accuracy: null,
@@ -27,48 +27,55 @@ const useGeolocation = (options?: PositionOptions): GeoLocationSensorState => {
     speed: null,
     timestamp: Date.now(),
   });
-  const isMounted = useMountedState();
+  useEffect(() => {
+    const locations = new Observable((observer: Subscriber<Position>) => {
+      let watchId: number;
+      if ('geolocation' in navigator) {
+        watchId = navigator.geolocation.watchPosition(
+          (position) => {
+            observer.next(position);
+          },
+          (error) => {
+            observer.error(error);
+          },
+          options,
+        );
+      } else {
+        observer.error('Geolocation not available');
+      }
+      return {
+        unsubscribe() {
+          navigator.geolocation.clearWatch(watchId);
+        },
+      };
+    });
 
-  const onEvent = useCallback(
-    (event: any) => {
-      if (isMounted()) {
+    const subscribe = locations.subscribe(
+      (position) => {
         setState({
           loading: false,
-          accuracy: event.coords.accuracy,
-          altitude: event.coords.altitude,
-          altitudeAccuracy: event.coords.altitudeAccuracy,
-          heading: event.coords.heading,
-          latitude: event.coords.latitude,
-          longitude: event.coords.longitude,
-          speed: event.coords.speed,
-          timestamp: event.timestamp,
+          accuracy: position.coords.accuracy,
+          altitude: position.coords.altitude,
+          altitudeAccuracy: position.coords.altitudeAccuracy,
+          heading: position.coords.heading,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          speed: position.coords.speed,
+          timestamp: position.timestamp,
         });
-      }
-    },
-    [isMounted, setState],
-  );
-  const onEventError = useCallback(
-    (error: PositionError) => {
-      if (isMounted()) {
+      },
+      (error: never) => {
         setState((draft) => {
           draft.loading = false;
           draft.error = error;
         });
-      }
-    },
-    [isMounted, setState],
-  );
-  const watchId = useRef(0);
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(onEvent, onEventError, options);
-    watchId.current = navigator.geolocation.watchPosition(onEvent, onEventError, options);
+      },
+    );
 
     return () => {
-      navigator.geolocation.clearWatch(watchId.current);
+      subscribe.unsubscribe();
     };
-  }, [onEvent, onEventError, options]);
+  }, [options, setState]);
 
   return state;
 };
-
-export default useGeolocation;

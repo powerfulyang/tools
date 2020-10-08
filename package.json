@@ -21,7 +21,6 @@
     "watch:components": "lerna exec --scope @powerfulyang/components -- npm run watch:build",
     "watch:example": "lerna exec --scope example -- npm run storybook",
     "fix:components:style": "lerna exec --scope @powerfulyang/components -- npm run fix:style",
-    "build:tailwind": "npx tailwindcss build -c ./packages/components/tailwind.js -o packages/components/.tailwindcss/index.css",
     "precommit": "npm run prettier && npm run lint && npm run fix:components:style"
   },
   "husky": {
