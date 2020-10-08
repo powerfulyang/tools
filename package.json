@@ -21,6 +21,7 @@
     "watch:components": "lerna exec --scope @powerfulyang/components -- npm run watch:build",
     "watch:example": "lerna exec --scope example -- npm run storybook",
     "fix:components:style": "lerna exec --scope @powerfulyang/components -- npm run fix:style",
+    "fix:home:style": "lerna exec --scope powerfulyang.com -- npm run fix:style",
     "precommit": "npm run prettier && npm run lint && npm run fix:components:style"
   },
   "husky": {
