@@ -18,6 +18,7 @@
     "build:lint": "lerna exec --scope @powerfulyang/lint -- npm run build",
     "build:node-utils": "lerna exec --scope @powerfulyang/node-utils -- npm run build",
     "start:dev:api": "lerna exec --scope api.powerfulyang.com -- npm run start:dev",
+    "start:dev:admin": "lerna exec --scope admin.powerfulyang.com -- npm run start:dev",
     "watch:components": "lerna exec --scope @powerfulyang/components -- npm run watch:build",
     "watch:example": "lerna exec --scope example -- npm run storybook",
     "fix:components:style": "lerna exec --scope @powerfulyang/components -- npm run fix:style",
