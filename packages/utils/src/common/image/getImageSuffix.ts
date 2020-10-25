@@ -38,5 +38,5 @@ export function getImageSuffix(fileBuffer: Buffer) {
       return imageBufferHeader.suffix;
     }
   }
-  return '';
+  throw new Error('unsupported image file type(s)!');
 }

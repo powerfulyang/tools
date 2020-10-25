@@ -1,6 +1,6 @@
 {
   "name": "@powerfulyang/components",
-  "version": "0.7.1",
+  "version": "0.7.3",
   "description": "react-components",
   "author": "powerfulyang",
   "license": "MIT",
@@ -29,8 +29,8 @@
   },
   "dependencies": {
     "@mojs/core": "^0.288.2",
-    "@powerfulyang/hooks": "^0.2.1",
-    "@powerfulyang/utils": "^0.7.1",
+    "@powerfulyang/hooks": "^0.2.3",
+    "@powerfulyang/utils": "^0.7.3",
     "formik": "^2.1.5",
     "react": "^16.13.1",
     "react-animate-height": "^2.0.23",
@@ -40,8 +40,8 @@
     "rxjs": "^6.6.3"
   },
   "devDependencies": {
-    "@powerfulyang/lint": "^0.2.1",
-    "@powerfulyang/node-utils": "^0.2.1",
+    "@powerfulyang/lint": "^0.2.3",
+    "@powerfulyang/node-utils": "^0.2.3",
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-url": "^5.0.1",
