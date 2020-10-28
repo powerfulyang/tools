@@ -27,9 +27,6 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "test": "jest"
   },
-  "peerDependencies": {
-    "sharp": "^0.26.2"
-  },
   "devDependencies": {
     "@powerfulyang/lint": "^0.2.3",
     "@types/sharp": "^0.26.0",
