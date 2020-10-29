@@ -17,7 +17,7 @@
     "@powerfulyang/components": "^0.7.3",
     "@powerfulyang/hooks": "^0.2.3",
     "@powerfulyang/utils": "^0.7.3",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "rxjs": "^6.6.3"
   },
   "devDependencies": {
