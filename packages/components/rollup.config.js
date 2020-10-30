@@ -42,5 +42,5 @@ export default {
     babel(),
     __prod__ && terser(),
   ],
-  external: pkgDeps,
+  external: [...pkgDeps, 'react', 'react-dom'],
 };
