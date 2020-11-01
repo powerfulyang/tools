@@ -1,4 +1,4 @@
-import { ReturnTypedFunction } from '../../types';
+import { ReturnTypedFunction, VoidFunction } from '../../types';
 
 export const Memoize = (hashFunction?: ReturnTypedFunction): MethodDecorator => {
   return (
@@ -23,7 +23,7 @@ function getNewFunction(
 ): ReturnTypedFunction {
   const identifier = ++counter;
   // The function returned here gets called instead of originalMethod.
-  return function Func(this: any, ...args: any[]) {
+  return function Func(this: any, ...args: string[]) {
     const propValName = `__memoized_value_${identifier}`;
     const propMapName = `__memoized_map_${identifier}`;
 
