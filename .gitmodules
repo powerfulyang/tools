@@ -1,9 +1,12 @@
 [submodule "api"]
 	path = project/api
 	url = https://github.com/Aquachurch/api.powerfulyang.com.git
+	branch = master
 [submodule "homepage"]
 	path = project/home
 	url = https://github.com/Aquachurch/powerfulyang.com.git
+	branch = master
 [submodule "admin"]
 	path = project/admin
 	url = https://github.com/Aquachurch/admin.powerfulyang.com.git
+	branch = master
