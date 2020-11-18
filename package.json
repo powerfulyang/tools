@@ -12,6 +12,8 @@
   "scripts": {
     "to-publish": "lerna publish --no-private",
     "i": "yarn install",
+    "update": "lerna exec -- ncu -u",
+    "install": "lerna bootstrap --hoist",
     "clean-lock": "lerna exec -- rm -rf package-lock.json",
     "build": "lerna exec --ignore *powerfulyang.com -- npm run build",
     "prettier": "lerna exec -- npm run prettier",
