@@ -24,7 +24,6 @@
     "last 2 versions"
   ],
   "dependencies": {
-    "@mojs/core": "^0.288.2",
     "@powerfulyang/hooks": "^0.2.5",
     "@powerfulyang/utils": "^0.7.5",
     "react-animate-height": "^2.0.23",
