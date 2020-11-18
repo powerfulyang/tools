@@ -1,6 +1,6 @@
 {
   "name": "@powerfulyang/utils",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "common utils",
   "main": "dist/main/index.js",
   "module": "dist/module/index.js",
@@ -29,7 +29,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@powerfulyang/lint": "^0.2.5"
+    "@powerfulyang/lint": "^0.2.6"
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13"
