@@ -42,9 +42,9 @@ const Head = (level: number, children: ReactNode) => {
     case HeadingEnum.H2:
       return <h2 className="text-3xl font-semibold">{children}</h2>;
     case HeadingEnum.H3:
-      return <h3 className="text-2xl font-medium">{children}</h3>;
+      return <h3 className="text-2xl font-semibold">{children}</h3>;
     case HeadingEnum.H4:
-      return <h4 className="text-xl font-medium">{children}</h4>;
+      return <h4 className="text-xl font-semibold">{children}</h4>;
     default:
       return children;
   }
@@ -85,12 +85,10 @@ export const ListItem: FC<{ checked: null | boolean; ordered: boolean; index: nu
   return (
     <li>
       {props.ordered && (
-        <span className="text-blue-300 pr-2 font-medium text-2xl">{props.index + 1}.</span>
+        <span className="text-blue-300 pr-2 text-xs font-medium">{props.index + 1}.</span>
       )}
       <span>{props.children}</span>
-      {props.checked !== null && (
-        <span className="pl-3 text-blue-300">{(props.checked && '√') || '×'}</span>
-      )}
+      <span className="pl-3 text-blue-300">{JSON.stringify(props.checked)}</span>
     </li>
   );
 };
