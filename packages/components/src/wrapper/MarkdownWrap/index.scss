@@ -1,10 +1,12 @@
 .markdown_body {
+  padding: 1rem 5rem;
+
   .heading1 {
     @apply relative block h-auto p-2 font-bold text-center text-black border border-black border-solid;
     &::before {
       top: -0.4rem;
       left: -0.4rem;
-      content: '';
+      content: ' ';
       @apply absolute block float-left w-11/12 h-px border-t border-black border-solid;
     }
 
@@ -18,9 +20,11 @@
       background-color: #000;
       box-shadow: 3px 0 #000, 0 3px #000, -3px 0 #000, 0 -3px #000;
     }
+
     .content {
       @apply block pl-10 pr-10 text-3xl font-semibold;
     }
+
     .suffix {
       display: block;
       width: 3px;
@@ -31,10 +35,11 @@
       background-color: #000;
       box-shadow: 3px 0 #000, 0 3px #000, -3px 0 #000, 0 -3px #000;
     }
+
     &::after {
       right: -0.4rem;
       bottom: -0.4rem;
-      content: '';
+      content: ' ';
       @apply absolute block w-11/12 h-px border-b border-black border-solid;
     }
   }
@@ -44,23 +49,110 @@
     @apply p-4 bg-gray-300 border-l-4 border-blue-600;
   }
 
+  & > ul {
+    margin: 0 2rem;
+  }
+
   // list
   .list_even {
+    padding-left: 1rem;
     list-style-type: square;
-    @apply ml-6;
   }
+
   .list_odd {
+    padding-left: 1rem;
     list-style-type: circle;
-    @extend .list_even;
   }
+
   .list_ordered {
     list-style-type: none;
-    @extend .list_even;
+  }
+
+  .list_content {
+    overflow: hidden
+  }
+
+  .task_list_parent {
+    @apply p-2 border border-blue-500 border-solid;
+
+    padding: 2em 2em;
+    border-radius: 2rem;
+
+    .task_list {
+      display: flex;
+      align-items: center;
+      margin-top: 1em;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      .content_done {
+        padding: 0 1em;
+        font-weight: bold;
+      }
+
+      .content_undone {
+        @extend .content_done;
+
+        color: red;
+        font-style: italic;
+      }
+
+      .done {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .icon {
+        @extend .done;
+      }
+
+      .undone {
+        @extend .done;
+      }
+    }
   }
 
   // table
   .table {
-    border-color: grey;
-    border-width: 1px;
+    border: darkgrey 2px dashed;
+
+    thead {
+      border-bottom: cornflowerblue 2px solid;
+
+      tr {
+        th {
+          padding: 1em;
+          border-left: cornflowerblue 2px solid;
+
+          &:first-child {
+            border: none;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: darkgrey 2px dashed;
+
+        td {
+          padding: 0.5em;
+          text-align: center;
+          border-left: cornflowerblue 2px solid;
+
+          &:first-child {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+
+  p > code {
+    padding: 0.2em;
+    font-weight: bold;
+    background-color: lightgray;
   }
 }

@@ -1,7 +1,9 @@
 import React, { FC, memo, ReactNode, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark as style } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import classNames from 'classnames';
 import styles from './index.scss';
+import { Icon } from '../../components/Icon/Icon';
 
 type CodeProps = {
   value: string;
@@ -23,6 +25,7 @@ export enum HeadingEnum {
   H4,
   H5,
 }
+
 const H1: FC = ({ children }) => {
   return (
     <h1 className="flex justify-center h-auto m-4">
@@ -40,11 +43,11 @@ const Head = (level: number, children: ReactNode) => {
     case HeadingEnum.H1:
       return <H1>{children}</H1>;
     case HeadingEnum.H2:
-      return <h2 className="text-3xl font-semibold">{children}</h2>;
+      return <h2 className="text-3xl font-semibold my-2">{children}</h2>;
     case HeadingEnum.H3:
-      return <h3 className="text-2xl font-semibold">{children}</h3>;
+      return <h3 className="text-2xl font-semibold my-2">{children}</h3>;
     case HeadingEnum.H4:
-      return <h4 className="text-xl font-semibold">{children}</h4>;
+      return <h4 className="text-xl font-semibold my-2">{children}</h4>;
     default:
       return children;
   }
@@ -56,7 +59,7 @@ export const Heading: FC<{ level: number }> = memo(({ level, children }) => {
 
 export const Link: FC<{ href: string }> = ({ href, children }) => {
   return (
-    <a className="font-medium text-blue-300" href={href}>
+    <a className="font-medium text-blue-300 border-b-2" href={href}>
       {children}
     </a>
   );
@@ -68,7 +71,7 @@ export const BlockQuote: FC = ({ children }) => {
 
 export const List: FC<{ depth: number; ordered: boolean }> = (props) => {
   if (props.children![0].props.checked !== null) {
-    return <ul className="p-2 border border-blue-500 border-solid">{props.children}</ul>;
+    return <ul className={styles.task_list_parent}>{props.children}</ul>;
   }
   if (props.ordered) {
     return <ul className={styles.list_ordered}>{props.children}</ul>;
@@ -83,12 +86,35 @@ export const ListItem: FC<{ checked: null | boolean; ordered: boolean; index: nu
   props,
 ) => {
   return (
-    <li>
+    <li
+      className={classNames({
+        [styles.task_list]: props.checked !== null,
+      })}
+    >
+      {props.checked === true && (
+        <div className={styles.icon}>
+          <Icon type="icon-yiwancheng" className={styles.done} />
+        </div>
+      )}
+      {props.checked === false && (
+        <div className={styles.icon}>
+          <Icon type="icon-weiwancheng" className={styles.undone} />
+        </div>
+      )}
       {props.ordered && (
         <span className="text-blue-300 pr-2 text-xs font-medium">{props.index + 1}.</span>
       )}
-      <span>{props.children}</span>
-      <span className="pl-3 text-blue-300">{JSON.stringify(props.checked)}</span>
+      <span
+        className={classNames(
+          {
+            [styles.content_done]: props.checked,
+            [styles.content_undone]: !props.checked,
+          },
+          styles.list_content,
+        )}
+      >
+        {props.children}
+      </span>
     </li>
   );
 };

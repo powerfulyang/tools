@@ -19,6 +19,7 @@
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "declaration": true
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx"]

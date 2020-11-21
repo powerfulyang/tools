@@ -18,7 +18,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "build": "rimraf dist && cross-env NODE_ENV=production rollup -c",
     "build:dev": "rimraf dist && cross-env NODE_ENV=development rollup -c",
-    "watch:build": "rimraf dist && cross-env NODE_ENV=development rollup -c --watch"
+    "watch:build": "rimraf dist && cross-env NODE_ENV=production rollup -c --watch"
   },
   "browserslist": [
     "last 2 versions"
@@ -30,7 +30,8 @@
     "react-markdown": "^5.0.2",
     "react-syntax-highlighter": "^15.3.0",
     "rxjs": "^6.6.3",
-    "remark-gfm": "^1.0.0"
+    "remark-gfm": "^1.0.0",
+    "classnames": "^2.2.6"
   },
   "devDependencies": {
     "@powerfulyang/lint": "^0.2.6",
