@@ -1,6 +1,6 @@
 {
   "name": "@powerfulyang/components",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "description": "react-components",
   "author": "powerfulyang",
   "license": "MIT",
@@ -26,12 +26,12 @@
   "dependencies": {
     "@powerfulyang/hooks": "^0.2.6",
     "@powerfulyang/utils": "^0.7.6",
+    "classnames": "^2.2.6",
     "react-animate-height": "^2.0.23",
     "react-markdown": "^5.0.2",
     "react-syntax-highlighter": "^15.3.0",
-    "rxjs": "^6.6.3",
     "remark-gfm": "^1.0.0",
-    "classnames": "^2.2.6"
+    "rxjs": "^6.6.3"
   },
   "devDependencies": {
     "@powerfulyang/lint": "^0.2.6",
