@@ -1,6 +1,6 @@
 {
   "name": "@powerfulyang/node-utils",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "common utils",
   "main": "dist/main/index.js",
   "module": "dist/module/index.js",
@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@powerfulyang/lint": "^0.2.6",
+    "@powerfulyang/lint": "^0.2.7",
     "@types/sharp": "^0.26.1",
     "sharp": "^0.26.3"
   }
