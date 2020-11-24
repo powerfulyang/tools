@@ -1,13 +1,17 @@
 .markdown_body {
-  padding: 1rem 5rem;
+  @tailwind base;
+
+  word-wrap: break-word;
+  word-break: break-all;
 
   .heading1 {
     @apply relative block h-auto p-2 font-bold text-center text-black border border-black border-solid;
     &::before {
       top: -0.4rem;
       left: -0.4rem;
+      border-bottom: 1px solid black;
       content: ' ';
-      @apply absolute block float-left w-11/12 h-px border-t border-black border-solid;
+      @apply absolute block float-left w-11/12 h-px;
     }
 
     .prefix {
@@ -39,9 +43,20 @@
     &::after {
       right: -0.4rem;
       bottom: -0.4rem;
+      border-bottom: 1px solid black;
       content: ' ';
-      @apply absolute block w-11/12 h-px border-b border-black border-solid;
+      @apply absolute block w-11/12 h-px;
     }
+  }
+
+  h2 {
+    @apply text-3xl font-semibold my-2;
+  }
+  h3 {
+    @apply text-2xl font-semibold my-2;
+  }
+  h4 {
+    @apply text-xl font-semibold my-2;
   }
 
   // blockquote
@@ -50,17 +65,18 @@
   }
 
   & > ul {
-    margin: 0 2rem;
+    margin: 0 1em;
+    padding: unset;
   }
 
   // list
   .list_even {
-    padding-left: 1rem;
-    list-style-type: square;
+    padding-left: 1em;
+    list-style-type: disc;
   }
 
   .list_odd {
-    padding-left: 1rem;
+    padding-left: 1em;
     list-style-type: circle;
   }
 
@@ -69,7 +85,7 @@
   }
 
   .list_content {
-    overflow: hidden
+    overflow: hidden;
   }
 
   .task_list_parent {
@@ -89,14 +105,12 @@
 
       .content_done {
         padding: 0 1em;
-        font-weight: bold;
       }
 
       .content_undone {
         @extend .content_done;
 
         color: red;
-        font-style: italic;
       }
 
       .done {
