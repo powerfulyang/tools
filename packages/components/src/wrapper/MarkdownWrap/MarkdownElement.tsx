@@ -59,7 +59,7 @@ export const Heading: FC<{ level: number }> = memo(({ level, children }) => {
 
 export const Link: FC<{ href: string }> = ({ href, children }) => {
   return (
-    <a className="font-medium text-blue-600 border-b-2" href={href}>
+    <a rel="noreferrer" target="_blank" href={href}>
       {children}
     </a>
   );
