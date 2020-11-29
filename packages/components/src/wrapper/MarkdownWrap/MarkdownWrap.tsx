@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import classNames from 'classnames';
 import { BlockQuote, Code, Heading, Link, List, ListItem, Table } from './MarkdownElement';
 import styles from './index.scss';
 
 export type MarkdownWrapProps = {
   source: string;
+  className?: string;
 };
 
-export const MarkdownWrap: FC<MarkdownWrapProps> = ({ source }) => {
+export const MarkdownWrap: FC<MarkdownWrapProps> = ({ source, className }) => {
   return (
     <ReactMarkdown
-      className={styles.markdown_body}
+      className={classNames(styles.markdown_body, className)}
       plugins={[remarkGfm]}
       renderers={{
         code: Code,
