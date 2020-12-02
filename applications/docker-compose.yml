@@ -1,0 +1,71 @@
+version: '3'
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    environment:
+      - NGINX_ENTRYPOINT_QUIET_LOGS=1
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ~/.acme.sh/powerfulyang.com/:/usr/share/nginx/cert/powerfulyang.com/
+      - ~/www/:/usr/share/nginx/www/
+      - ./nginx/404.html:/usr/share/nginx/www/404.html
+      - ./nginx/conf/:/usr/share/nginx/conf/
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://localhost:12201
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: always
+    ports:
+      - 4856:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --explicit_defaults_for_timestamp=true --lower_case_table_names=1 --max_allowed_packet=128M --performance_schema=OFF;
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    restart: always
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+  netdata:
+    image: netdata/netdata
+    container_name: netdata
+    restart: always
+    ports:
+      - 19999:19999
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  api.powerfulyang.com:
+    image: powerfulyang/api.powerfulyang.com
+    container_name: api.powerfulyang.com
+    volumes:
+      - ./api.powerfulyang.com/assets:/usr/app/assets
+      - ./api.powerfulyang.com/.cookies:/usr/app/.cookies
+    restart: always
+    command: npm run start:prod
+    env_file:
+      - .env
+  powerfulyang.com:
+    image: powerfulyang/powerfulyang.com
+    container_name: powerfulyang.com
+    restart: always
+    environment:
+      'NODE_ENV': 'production'
+    command: npm run start
+
