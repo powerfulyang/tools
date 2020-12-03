@@ -10,13 +10,9 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ~/.acme.sh/powerfulyang.com/:/usr/share/nginx/cert/powerfulyang.com/
-      - ~/www/:/usr/share/nginx/www/
+      - ./www/:/usr/share/nginx/www/
       - ./nginx/404.html:/usr/share/nginx/www/404.html
       - ./nginx/conf/:/usr/share/nginx/conf/
-    logging:
-      driver: gelf
-      options:
-        gelf-address: udp://localhost:12201
   mysql:
     image: mysql
     container_name: mysql
@@ -26,6 +22,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test
+      TZ: Asia/Shanghai
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --explicit_defaults_for_timestamp=true --lower_case_table_names=1 --max_allowed_packet=128M --performance_schema=OFF;
     volumes:
       - ./mysql/data:/var/lib/mysql
@@ -60,12 +57,12 @@ services:
     restart: always
     command: npm run start:prod
     env_file:
-      - .env
+      - ./api.powerfulyang.com/.env
   powerfulyang.com:
     image: powerfulyang/powerfulyang.com
     container_name: powerfulyang.com
     restart: always
-    environment:
-      'NODE_ENV': 'production'
     command: npm run start
+    env_file:
+      - ./powerfulyang.com/.env
 
