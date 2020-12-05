@@ -3,7 +3,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark as style } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import classNames from 'classnames';
 import styles from './index.scss';
-import { Icon } from '../../components/Icon/Icon';
+import { Icon, IconTag, ShowQrCode } from '../../components';
 
 type CodeProps = {
   value: string;
@@ -121,4 +121,65 @@ export const ListItem: FC<{ checked: null | boolean; ordered: boolean; index: nu
 
 export const Table: FC = (props) => {
   return <table className={styles.table}>{props.children}</table>;
+};
+
+type NodeType = 'paragraph' | 'text' | 'html';
+
+type NodePosition = {
+  start: { line: number; column: number; offset: number };
+  end: { line: number; column: number; offset: number };
+};
+
+type Node = {
+  type: NodeType;
+  children: Node[];
+  value: string;
+  position: NodePosition;
+};
+
+export const Paragraph: FC<{ node: Node }> = (props) => {
+  const text = props.node.children[0].value;
+  if (text?.startsWith('tags=>')) {
+    const tags = text.trim().replace('tags=>', '').split('|');
+    return (
+      <div className="my-4 ml-10">
+        {tags.map((tag) => (
+          <IconTag key={tag} value={tag} />
+        ))}
+      </div>
+    );
+  }
+  if (text?.startsWith('post=>')) {
+    const info = text.trim().replace('post=>', '').split('|');
+    const author = info[0];
+    const postDate = info[1];
+    const wordCount = info[2];
+    const viewCount = info[3];
+    return (
+      <div className={styles.post_info}>
+        <span className={styles.author}>
+          <Icon type="icon-author" />
+          <span className={styles.post_info_comment}>{author}</span>
+        </span>
+        <span className={styles.date}>
+          <Icon type="icon-date" />
+          <span className={styles.post_info_comment}>发表于{postDate}</span>
+        </span>
+        <span className={styles.word_count}>
+          <Icon type="icon-count" />
+          <span className={styles.post_info_comment}>文字总数{wordCount}</span>
+        </span>
+        <span className={styles.view_count}>
+          <Icon type="icon-view_count" />
+          <span className={styles.post_info_comment}>被{viewCount}人临幸</span>
+        </span>
+        <span className={styles.qrcode}>
+          <ShowQrCode>
+            <span className={styles.post_info_comment}>手机上打开</span>
+          </ShowQrCode>
+        </span>
+      </div>
+    );
+  }
+  return <p>{props.children}</p>;
 };
