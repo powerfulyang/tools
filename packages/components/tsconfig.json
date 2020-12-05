@@ -4,8 +4,9 @@
     "outDir": "dist",
     "module": "esnext",
     "target": "es5",
-    "lib": ["es6", "dom", "esnext.asynciterable"],
+    "lib": ["es6", "dom", "esnext"],
     "sourceMap": true,
+    "inlineSourceMap": true,
     "allowJs": true,
     "jsx": "react",
     "moduleResolution": "node",
@@ -20,7 +21,11 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "declaration": true
+    "declaration": true,
+    "paths": {
+      "@": ["./src"],
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

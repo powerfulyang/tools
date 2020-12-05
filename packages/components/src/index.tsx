@@ -7,6 +7,6 @@ export * from './wrapper/MarkdownWrap/MarkdownWrap';
 
 if (isClient) {
   const scriptElem = document.createElement('script');
-  scriptElem.src = '//at.alicdn.com/t/font_178634_ahr86m08wkb.js';
+  scriptElem.src = '//at.alicdn.com/t/font_178634_f64p53tskrp.js';
   document.body.appendChild(scriptElem);
 }
