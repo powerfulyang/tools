@@ -175,7 +175,7 @@ export const Paragraph: FC<{ node: Node }> = (props) => {
         </span>
         <span className={styles.qrcode}>
           <ShowQrCode>
-            <span className={styles.post_info_comment}>手机上打开</span>
+            <a className={styles.post_info_comment}>手机上打开</a>
           </ShowQrCode>
         </span>
       </div>
