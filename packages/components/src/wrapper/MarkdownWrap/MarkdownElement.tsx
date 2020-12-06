@@ -2,8 +2,8 @@ import React, { FC, memo, ReactNode, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark as style } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import classNames from 'classnames';
+import { Icon, IconTag, ShowQrCode, Popover, CurrentPageQrCode } from '@/components';
 import styles from './index.scss';
-import { Icon, IconTag, ShowQrCode } from '../../components';
 
 type CodeProps = {
   value: string;
@@ -142,7 +142,7 @@ export const Paragraph: FC<{ node: Node }> = (props) => {
   if (text?.startsWith('tags=>')) {
     const tags = text.trim().replace('tags=>', '').split('|');
     return (
-      <div className="my-4 ml-10">
+      <div className="my-4 lg:ml-6 sm:ml-2">
         {tags.map((tag) => (
           <IconTag key={tag} value={tag} />
         ))}
@@ -174,9 +174,11 @@ export const Paragraph: FC<{ node: Node }> = (props) => {
           <span className={styles.post_info_comment}>被{viewCount}人临幸</span>
         </span>
         <span className={styles.qrcode}>
-          <ShowQrCode>
-            <a className={styles.post_info_comment}>手机上打开</a>
-          </ShowQrCode>
+          <Popover popoverContent={<CurrentPageQrCode />}>
+            <ShowQrCode>
+              <a className={styles.post_info_comment}>手机上打开</a>
+            </ShowQrCode>
+          </Popover>
         </span>
       </div>
     );

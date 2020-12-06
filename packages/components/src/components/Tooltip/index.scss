@@ -1,0 +1,51 @@
+@import 'src/global';
+
+.wrap {
+  $bg: rgba(0, 0, 0, 0.75);
+  @apply relative;
+  * {
+    @extend .pointer;
+  }
+  .tooltip {
+    bottom: 100%;
+    left: 50%;
+    margin-top: -1.8rem;
+    background-color: $bg;
+    border-radius: 2px;
+    transform: translateX(-50%);
+    opacity: 0;
+    @apply absolute opacity-0;
+    &.fade {
+      transition: opacity 0.15s linear, transform 0.15s ease-out;
+    }
+
+    &.hidden {
+      left: -100vw;
+    }
+
+    &.in {
+      opacity: 1;
+      transition: opacity 0.2s linear, transform 0.2s ease-in;
+    }
+
+    .arrow {
+      bottom: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      @apply absolute block w-4 h-4 overflow-hidden;
+      .content {
+        width: 0.4rem;
+        height: 0.4rem;
+        background-color: $bg;
+        transform: translateY(-0.5rem) rotate(45deg);
+        @apply absolute top-0 right-0 bottom-0 left-0 block m-auto;
+      }
+    }
+  }
+
+  .title {
+    min-width: 2rem;
+    font-size: 0.8rem;
+    @apply text-center px-2 py-1 text-white block whitespace-no-wrap;
+  }
+}

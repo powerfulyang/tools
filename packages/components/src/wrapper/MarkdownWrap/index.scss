@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
 .markdown_body {
   @tailwind base;
 
@@ -198,6 +200,9 @@
     }
     .qrcode {
       @extend .my;
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
   }
 }
