@@ -3,9 +3,6 @@
 .markdown_body {
   @tailwind base;
 
-  word-wrap: break-word;
-  word-break: break-all;
-
   .heading1 {
     @apply relative block h-auto p-2 font-bold text-center text-black border border-black border-solid;
     &::before {
