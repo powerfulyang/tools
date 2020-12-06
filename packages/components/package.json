@@ -31,7 +31,8 @@
     "react-markdown": "^5.0.2",
     "react-syntax-highlighter": "^15.3.0",
     "remark-gfm": "^1.0.0",
-    "rxjs": "^6.6.3"
+    "rxjs": "^6.6.3",
+    "qrious": "^4.0.2"
   },
   "devDependencies": {
     "@powerfulyang/lint": "^0.2.8",
