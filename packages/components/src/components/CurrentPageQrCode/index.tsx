@@ -18,8 +18,10 @@ export const CurrentPageQrCode: FC<Props> = () => {
       const qrcode = new Image();
       qrcode.src = base64;
       const ctx = ref.current.getContext('2d');
+      ctx!.fillStyle = '#fff';
+      ctx!.fillRect(0, 0, 110, 110);
       qrcode.onload = () => {
-        ctx!.drawImage(qrcode, 0, 0);
+        ctx!.drawImage(qrcode, 5, 5, 100, 100);
       };
       const avatar = new Image();
       avatar.src =
@@ -32,7 +34,7 @@ export const CurrentPageQrCode: FC<Props> = () => {
 
   return (
     <div className={styles.shareQrCode}>
-      <canvas ref={ref} width={100} height={100} />
+      <canvas ref={ref} width={110} height={110} />
     </div>
   );
 };
