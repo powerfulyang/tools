@@ -29,9 +29,11 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@powerfulyang/lint": "^0.2.8"
+    "@powerfulyang/lint": "^0.2.8",
+    "@types/ip": "^1.1.0"
   },
   "dependencies": {
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "ip": "^1.1.5"
   }
 }
