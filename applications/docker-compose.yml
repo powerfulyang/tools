@@ -37,6 +37,7 @@ services:
     image: redis
     container_name: redis
     restart: always
+    command: redis-server --save "" --appendfsync no
   netdata:
     image: netdata/netdata
     container_name: netdata
