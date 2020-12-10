@@ -19,11 +19,10 @@ export const CurrentPageQrCode: FC<Props> = () => {
       qrcode.src = base64;
       const ctx = ref.current.getContext('2d');
       ctx!.fillStyle = '#fff';
-      const bgRectWidth = 105;
-      const offset = (bgRectWidth - bgRectWidth) / 2;
-      ctx!.fillRect(offset, offset, bgRectWidth, bgRectWidth);
+      const bgRectWidth = 220;
+      ctx!.fillRect(0, 0, bgRectWidth, bgRectWidth);
       qrcode.onload = () => {
-        const qrCodeWith = 95;
+        const qrCodeWith = 200;
         const offset1 = (bgRectWidth - qrCodeWith) / 2;
         ctx!.drawImage(qrcode, offset1, offset1, qrCodeWith, qrCodeWith);
       };
@@ -31,7 +30,7 @@ export const CurrentPageQrCode: FC<Props> = () => {
       avatar.src =
         'https://lh3.googleusercontent.com/a-/AOh14GhPb7zfSSYTvNA6psX28gfeiA5br7m1iPhwq72_-Q=s96-c';
       avatar.onload = () => {
-        const avatarWith = 30;
+        const avatarWith = 80;
         const offset2 = (bgRectWidth - avatarWith) / 2;
         ctx!.drawImage(avatar, offset2, offset2, avatarWith, avatarWith);
       };
@@ -40,7 +39,7 @@ export const CurrentPageQrCode: FC<Props> = () => {
 
   return (
     <div className={styles.shareQrCode}>
-      <canvas ref={ref} width={105} height={105} />
+      <canvas ref={ref} width={220} height={220} />
     </div>
   );
 };
