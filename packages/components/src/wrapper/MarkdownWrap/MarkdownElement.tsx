@@ -155,6 +155,7 @@ export const Paragraph: FC<{ node: Node }> = (props) => {
     const postDate = info[1];
     const wordCount = info[2];
     const viewCount = info[3];
+    const avatar = info[4];
     return (
       <div className={styles.post_info}>
         <span className={styles.author}>
@@ -174,7 +175,7 @@ export const Paragraph: FC<{ node: Node }> = (props) => {
           <span className={styles.post_info_comment}>被{viewCount}人临幸</span>
         </span>
         <span className={styles.qrcode}>
-          <Popover popoverContent={<CurrentPageQrCode />}>
+          <Popover popoverContent={<CurrentPageQrCode image={avatar} />}>
             <ShowQrCode>
               <a className={styles.post_info_comment}>手机上打开</a>
             </ShowQrCode>

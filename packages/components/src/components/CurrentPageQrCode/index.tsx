@@ -2,9 +2,11 @@ import React, { FC, useEffect, useRef } from 'react';
 import QrCode from 'qrious';
 import styles from './index.scss';
 
-type Props = {};
+type Props = {
+  image?: string;
+};
 
-export const CurrentPageQrCode: FC<Props> = () => {
+export const CurrentPageQrCode: FC<Props> = ({ image }) => {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -25,17 +27,19 @@ export const CurrentPageQrCode: FC<Props> = () => {
         const qrCodeWith = 200;
         const offset1 = (bgRectWidth - qrCodeWith) / 2;
         ctx!.drawImage(qrcode, offset1, offset1, qrCodeWith, qrCodeWith);
-      };
-      const avatar = new Image();
-      avatar.src =
-        'https://lh3.googleusercontent.com/a-/AOh14GhPb7zfSSYTvNA6psX28gfeiA5br7m1iPhwq72_-Q=s96-c';
-      avatar.onload = () => {
-        const avatarWith = 80;
-        const offset2 = (bgRectWidth - avatarWith) / 2;
-        ctx!.drawImage(avatar, offset2, offset2, avatarWith, avatarWith);
+        // 画完二维码再画头像
+        if (image) {
+          const avatar = new Image();
+          avatar.src = image;
+          avatar.onload = () => {
+            const avatarWith = 80;
+            const offset2 = (bgRectWidth - avatarWith) / 2;
+            ctx!.drawImage(avatar, offset2, offset2, avatarWith, avatarWith);
+          };
+        }
       };
     }
-  }, []);
+  }, [image]);
 
   return (
     <div className={styles.shareQrCode}>
