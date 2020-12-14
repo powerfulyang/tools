@@ -12,6 +12,7 @@ export * from './hooks/useMeasure';
 export * from './hooks/useMount';
 export * from './hooks/useMountedState';
 export * from './hooks/usePageLeave';
+export * from './hooks/usePageQuery';
 export * from './hooks/usePortal';
 export * from './hooks/usePromise';
 export * from './hooks/useQuery';

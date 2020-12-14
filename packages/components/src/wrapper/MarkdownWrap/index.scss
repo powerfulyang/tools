@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 .markdown_body {
-  @tailwind base;
-
   .heading1 {
     @apply relative block h-auto p-2 font-bold text-center text-black border border-black border-solid;
     &::before {
@@ -51,22 +49,38 @@
   h2 {
     @apply text-2xl font-medium my-2;
   }
+
   h3 {
     @apply text-xl font-medium my-2;
   }
+
   h4 {
     @apply text-lg font-medium my-2;
   }
+
   a {
     @apply text-blue-600;
   }
+
   svg {
     display: inline-block;
+  }
+
+  p {
+    line-height: 1.5;
+    @apply mb-4;
+  }
+
+  strong {
+    @apply font-semibold text-sm;
   }
 
   // blockquote
   .blockquote {
     @apply p-4 bg-gray-300 border-l-4 border-blue-600;
+    p {
+      @apply my-0;
+    }
   }
 
   & > ul {
@@ -171,8 +185,8 @@
 
   p > code {
     padding: 0.2em;
-    font-weight: bold;
-    background-color: lightgray;
+    color: #4a4a4a;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   .post_info {
@@ -180,21 +194,27 @@
     .post_info_comment {
       @apply text-sm text-teal-500 pl-1;
     }
+
     .my {
       @apply mx-4;
     }
+
     .author {
       @extend .my;
     }
+
     .date {
       @extend .my;
     }
+
     .word_count {
       @extend .my;
     }
+
     .view_count {
       @extend .my;
     }
+
     .qrcode {
       @extend .my;
       @media (max-width: 768px) {
