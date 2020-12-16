@@ -2,7 +2,8 @@
 
 .markdown_body {
   .heading1 {
-    @apply relative block h-auto p-2 font-bold text-center text-black border border-black border-solid;
+    border-width: 1px;
+    @apply relative block h-auto p-2 font-bold text-center text-black border-black border-solid;
     &::before {
       top: -0.4rem;
       left: -0.4rem;
@@ -108,7 +109,7 @@
   }
 
   .task_list_parent {
-    @apply p-2 border border-blue-500 border-solid;
+    @apply p-2 border-blue-500 border-solid;
 
     padding: 2em 2em;
     border-radius: 2rem;

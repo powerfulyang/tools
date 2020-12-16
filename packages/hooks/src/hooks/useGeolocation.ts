@@ -12,7 +12,7 @@ export interface GeoLocationSensorState {
   longitude: number | null;
   speed: number | null;
   timestamp: number | null;
-  error?: Error | PositionError;
+  error?: Error | GeolocationPositionError;
 }
 
 export const useGeolocation = (options?: PositionOptions): GeoLocationSensorState => {
@@ -28,7 +28,7 @@ export const useGeolocation = (options?: PositionOptions): GeoLocationSensorStat
     timestamp: Date.now(),
   });
   useEffect(() => {
-    const locations = new Observable((observer: Subscriber<Position>) => {
+    const locations = new Observable((observer: Subscriber<GeolocationPosition>) => {
       let watchId: number;
       if ('geolocation' in navigator) {
         watchId = navigator.geolocation.watchPosition(

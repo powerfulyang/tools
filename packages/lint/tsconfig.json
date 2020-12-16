@@ -5,7 +5,7 @@
     "target": "es5",
     "lib": ["esnext", "dom"],
     "baseUrl": ".",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",

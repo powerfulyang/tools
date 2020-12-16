@@ -35,9 +35,9 @@
   },
   "devDependencies": {
     "@powerfulyang/lint": "^0.2.8",
-    "@testing-library/react-hooks": "^3.4.2",
+    "@testing-library/react-hooks": "^3.7.0",
     "@types/keyboardjs": "^2.5.0",
-    "isomorphic-fetch": "^2.2.1",
+    "isomorphic-fetch": "^3.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-test-renderer": "^17.0.1"

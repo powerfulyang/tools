@@ -1,6 +1,8 @@
-import { produce } from 'immer';
+import { produce, enableAllPlugins } from 'immer';
 import { useCallback, useState } from 'react';
 import { ReturnTypedFunction, VoidFunction, isFunction } from '@powerfulyang/utils';
+
+enableAllPlugins();
 
 export function useImmer<T = any>(initialValue?: T | ReturnTypedFunction<T>) {
   const [val, updateValue] = useState<T | undefined>(initialValue);
