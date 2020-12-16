@@ -1,36 +1,29 @@
-import { renderHook } from '@testing-library/react-hooks';
-import { Subject } from 'rxjs';
+import { renderHook, RenderHookResult } from '@testing-library/react-hooks';
 import { UseRequest, useRequest } from '..';
 
 describe('useRequest', () => {
-  it('should ', (done) => {
-    const subject = new Subject();
-    UseRequest.baseUrl = 'https://api.powerfulyang.com';
+  let requestHooks: RenderHookResult<{ id: number }, readonly [boolean, any]>;
 
-    const requestHooks = renderHook(
-      (id: number) => {
+  beforeAll(() => {
+    UseRequest.baseUrl = 'https://api.powerfulyang.com';
+    requestHooks = renderHook(
+      ({ id }) => {
         return useRequest({
           url: `/api/posts/${id}`,
-          async resTransform(res) {
-            const result = await res.json();
-            subject.next(result);
-          },
         });
       },
-      { initialProps: 1 },
+      { initialProps: { id: 1 } },
     );
+  });
 
-    subject.subscribe(
-      (data: any) => {
-        expect(data).toHaveProperty('status', 'ok');
-        if (data.data.id === 2) {
-          subject.error(0);
-        }
-        requestHooks.rerender(2);
-      },
-      () => {
-        done();
-      },
-    );
+  it('should ', async () => {
+    const { result } = requestHooks;
+    let [loading, post] = result.current;
+    expect(loading).toBe(true);
+    expect(post).toBeUndefined();
+    await requestHooks.waitForNextUpdate();
+    [loading, post] = result.current;
+    expect(loading).toBe(false);
+    expect(post).toHaveProperty('status', 'ok');
   });
 });
