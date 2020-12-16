@@ -1,7 +1,7 @@
 import React from 'react';
 import AnimateHeight, { AnimateHeightProps } from 'react-animate-height';
 import { __dev__ } from '@powerfulyang/utils';
-import { forwardRef } from '../../utils/forwardRef';
+import { forwardRef } from '@/utils/forwardRef';
 
 export interface CollapseOptions {
   /**
@@ -36,7 +36,7 @@ export interface CollapseOptions {
 
 export interface CollapseProps extends AnimateHeightProps, CollapseOptions {}
 
-export const Collapse = forwardRef<CollapseProps, 'div'>(function Collapse(props, ref) {
+export const Collapse = forwardRef<CollapseProps, 'div'>((props, ref) => {
   const {
     isOpen,
     animateOpacity = true,

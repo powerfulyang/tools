@@ -6,6 +6,7 @@
   * {
     @extend .pointer;
   }
+
   .tooltip {
     bottom: 100%;
     left: 50%;
@@ -46,6 +47,6 @@
   .title {
     min-width: 2rem;
     font-size: 0.8rem;
-    @apply text-center px-2 py-1 text-white block whitespace-no-wrap;
+    @apply text-center px-2 py-1 text-white block whitespace-nowrap;
   }
 }

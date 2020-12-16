@@ -4,9 +4,9 @@ import resolve from '@rollup/plugin-node-resolve';
 import url from '@rollup/plugin-url';
 import svgr from '@svgr/rollup';
 import babel from 'rollup-plugin-babel';
-import { terser } from 'rollup-plugin-terser';
+import {terser} from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
-import { __prod__ } from '@powerfulyang/utils';
+import {__prod__} from '@powerfulyang/utils';
 import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
 import pkg from './package.json';
@@ -29,7 +29,7 @@ export default {
   ],
   plugins: [
     postcss({
-      plugins: [autoprefixer(), tailwindcss('./tailwind.js')],
+      plugins: [autoprefixer(), tailwindcss('./tailwind.config.js')],
       minimize: __prod__,
       modules: true,
       extract: 'index.css',
@@ -37,7 +37,7 @@ export default {
     url(),
     svgr(),
     resolve(),
-    commonjs({ include: 'node_modules/**' }),
+    commonjs({include: 'node_modules/**'}),
     typescript(),
     babel(),
     __prod__ && terser(),

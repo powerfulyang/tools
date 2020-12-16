@@ -35,7 +35,10 @@ export const useRequest = <T = any>(reqOptions: ReqOptions<T>) => {
       },
     );
     if ((immediately || isFirstRef.current > 0) && runCase) {
-      const response = fetch(reqUrl);
+      const response = fetch(reqUrl, {
+        credentials: 'include',
+        body,
+      });
       response
         .then(resTransform)
         .then((r) => subject.next(r))
