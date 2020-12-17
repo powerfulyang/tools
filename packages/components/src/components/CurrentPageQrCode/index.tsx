@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react';
 import QrCode from 'qrious';
-import styles from './index.scss';
+import './index.scss';
 
 type Props = {
   image?: string;
@@ -42,7 +42,7 @@ export const CurrentPageQrCode: FC<Props> = ({ image }) => {
   }, [image]);
 
   return (
-    <div className={styles.shareQrCode}>
+    <div className="shareQrCode">
       <canvas ref={ref} width={220} height={220} />
     </div>
   );

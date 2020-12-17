@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './Spinner.scss';
+import './Spinner.scss';
 
 export function Spinner() {
   return (
-    <div className={styles.Spinner}>
+    <div className="Spinner">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 32 32"

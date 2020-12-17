@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Icon } from '../index';
-import styles from './index.scss';
+import './index.scss';
 
 interface OwnProps {
   value?: string;
@@ -13,9 +13,9 @@ export class IconTag extends PureComponent<Props> {
   render() {
     const { value, href } = this.props;
     return (
-      <div className={styles.tag}>
+      <div className="tag">
         <a href={href}>
-          <Icon className={styles.tag_icon} type="icon-tag" />
+          <Icon className="tag_icon" type="icon-tag" />
           {value}
         </a>
       </div>

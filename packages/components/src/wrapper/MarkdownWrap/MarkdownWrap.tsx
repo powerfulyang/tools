@@ -12,7 +12,7 @@ import {
   Paragraph,
   Table,
 } from './MarkdownElement';
-import styles from './index.scss';
+import './index.scss';
 
 export type MarkdownWrapProps = {
   source: string;
@@ -22,7 +22,7 @@ export type MarkdownWrapProps = {
 export const MarkdownWrap: FC<MarkdownWrapProps> = ({ source, className }) => {
   return (
     <ReactMarkdown
-      className={classNames(styles.markdown_body, className)}
+      className={classNames('markdown_body', className)}
       plugins={[remarkGfm]}
       renderers={{
         code: Code,

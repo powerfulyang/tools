@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import classNames from 'classnames';
 import { useImmer } from '@powerfulyang/hooks';
-import styles from './index.scss';
+import './index.scss';
 
 type Props = {
   title?: string;
@@ -13,7 +13,7 @@ export const Tooltip: FC<Props> = ({ children, title, popoverContent }) => {
   const [hidden, setHidden] = useImmer(true);
   return (
     <div
-      className={styles.wrap}
+      className="wrap"
       onMouseEnter={() => {
         setHidden(false);
         setVisible(true);
@@ -23,10 +23,10 @@ export const Tooltip: FC<Props> = ({ children, title, popoverContent }) => {
       }}
     >
       <div
-        className={classNames(styles.tooltip, {
-          [styles.in]: visible,
-          [styles.fade]: !visible,
-          [styles.hidden]: hidden,
+        className={classNames('tooltip', {
+          in: visible,
+          fade: !visible,
+          hidden,
         })}
         onTransitionEnd={() => {
           if (!visible) {
@@ -34,10 +34,10 @@ export const Tooltip: FC<Props> = ({ children, title, popoverContent }) => {
           }
         }}
       >
-        <div className={styles.arrow}>
-          <span className={styles.content} />
+        <div className="arrow">
+          <span className="content" />
         </div>
-        {title && <div className={styles.title}>{title}</div>}
+        {title && <div className="title">{title}</div>}
         {popoverContent}
       </div>
       {children}

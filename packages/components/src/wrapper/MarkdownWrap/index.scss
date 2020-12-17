@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
-
 .markdown_body {
   .heading1 {
     border-width: 1px;
@@ -109,7 +107,7 @@
   }
 
   .task_list_parent {
-    @apply p-2 border-blue-500 border-solid;
+    @apply p-2 border-blue-500 border-solid border-2;
 
     padding: 2em 2em;
     border-radius: 2rem;
