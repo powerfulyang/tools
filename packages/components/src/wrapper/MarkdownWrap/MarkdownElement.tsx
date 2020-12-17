@@ -3,7 +3,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark as style } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import classNames from 'classnames';
 import { Icon, IconTag, ShowQrCode, Popover, CurrentPageQrCode } from '@/components';
-import styles from './index.scss';
+import './index.scss';
 
 type CodeProps = {
   value: string;
@@ -29,10 +29,10 @@ export enum HeadingEnum {
 const H1: FC = ({ children }) => {
   return (
     <h1 className="flex justify-center h-auto m-4">
-      <span className={styles.heading1}>
-        <span className={styles.prefix} />
-        <span className={styles.content}>{children}</span>
-        <span className={styles.suffix} />
+      <span className="heading1">
+        <span className="prefix" />
+        <span className="content">{children}</span>
+        <span className="suffix" />
       </span>
     </h1>
   );
@@ -66,20 +66,20 @@ export const Link: FC<{ href: string }> = ({ href, children }) => {
 };
 
 export const BlockQuote: FC = ({ children }) => {
-  return <blockquote className={styles.blockquote}>{children}</blockquote>;
+  return <blockquote className="blockquote">{children}</blockquote>;
 };
 
 export const List: FC<{ depth: number; ordered: boolean }> = (props) => {
   if (props.children![0].props.checked !== null) {
-    return <ul className={styles.task_list_parent}>{props.children}</ul>;
+    return <ul className="task_list_parent">{props.children}</ul>;
   }
   if (props.ordered) {
-    return <ul className={styles.list_ordered}>{props.children}</ul>;
+    return <ul className="list_ordered">{props.children}</ul>;
   }
   if (props.depth % 2 === 0) {
-    return <ul className={styles.list_even}>{props.children}</ul>;
+    return <ul className="list_even">{props.children}</ul>;
   }
-  return <ul className={styles.list_odd}>{props.children}</ul>;
+  return <ul className="list_odd">{props.children}</ul>;
 };
 
 export const ListItem: FC<{ checked: null | boolean; ordered: boolean; index: number }> = (
@@ -88,17 +88,17 @@ export const ListItem: FC<{ checked: null | boolean; ordered: boolean; index: nu
   return (
     <li
       className={classNames({
-        [styles.task_list]: props.checked !== null,
+        task_list: props.checked !== null,
       })}
     >
       {props.checked === true && (
-        <div className={styles.icon}>
-          <Icon type="icon-yiwancheng" className={styles.done} />
+        <div className="icon">
+          <Icon type="icon-yiwancheng" className="done" />
         </div>
       )}
       {props.checked === false && (
-        <div className={styles.icon}>
-          <Icon type="icon-weiwancheng" className={styles.undone} />
+        <div className="icon">
+          <Icon type="icon-weiwancheng" className="undone" />
         </div>
       )}
       {props.ordered && (
@@ -107,10 +107,10 @@ export const ListItem: FC<{ checked: null | boolean; ordered: boolean; index: nu
       <span
         className={classNames(
           {
-            [styles.content_done]: props.checked,
-            [styles.content_undone]: !props.checked,
+            content_done: props.checked,
+            content_undone: !props.checked,
           },
-          styles.list_content,
+          'list_content',
         )}
       >
         {props.children}
@@ -120,7 +120,7 @@ export const ListItem: FC<{ checked: null | boolean; ordered: boolean; index: nu
 };
 
 export const Table: FC = (props) => {
-  return <table className={styles.table}>{props.children}</table>;
+  return <table className="table">{props.children}</table>;
 };
 
 type NodeType = 'paragraph' | 'text' | 'html';
@@ -157,27 +157,27 @@ export const Paragraph: FC<{ node: Node }> = (props) => {
     const viewCount = info[3];
     const avatar = info[4];
     return (
-      <div className={styles.post_info}>
-        <span className={styles.author}>
+      <div className="post_info">
+        <span className="author">
           <Icon type="icon-author" />
-          <span className={styles.post_info_comment}>{author}</span>
+          <span className="post_info_comment">{author}</span>
         </span>
-        <span className={styles.date}>
+        <span className="date">
           <Icon type="icon-date" />
-          <span className={styles.post_info_comment}>发表于{postDate}</span>
+          <span className="post_info_comment">发表于{postDate}</span>
         </span>
-        <span className={styles.word_count}>
+        <span className="word_count">
           <Icon type="icon-count" />
-          <span className={styles.post_info_comment}>文字总数{wordCount}</span>
+          <span className="post_info_comment">文字总数{wordCount}</span>
         </span>
-        <span className={styles.view_count}>
+        <span className="view_count">
           <Icon type="icon-view_count" />
-          <span className={styles.post_info_comment}>被{viewCount}人临幸</span>
+          <span className="post_info_comment">被{viewCount}人临幸</span>
         </span>
-        <span className={styles.qrcode}>
+        <span className="qrcode">
           <Popover popoverContent={<CurrentPageQrCode image={avatar} />}>
             <ShowQrCode>
-              <a className={styles.post_info_comment}>手机上打开</a>
+              <a className="post_info_comment">手机上打开</a>
             </ShowQrCode>
           </Popover>
         </span>
