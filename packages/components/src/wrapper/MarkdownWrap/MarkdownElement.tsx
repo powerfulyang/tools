@@ -45,7 +45,11 @@ const Head = (level: number, children: ReactNode) => {
     case HeadingEnum.H2:
       return <h2>{children}</h2>;
     case HeadingEnum.H3:
-      return <h3>{children}</h3>;
+      return (
+        <h3>
+          <span>{children}</span>
+        </h3>
+      );
     case HeadingEnum.H4:
       return <h4>{children}</h4>;
     default:
