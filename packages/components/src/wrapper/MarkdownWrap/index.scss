@@ -1,21 +1,23 @@
 $primary-color: #dec6fb;
 
 .markdown_body {
+  padding: 2rem 2rem;
   color: #595959;
   line-height: 1.75;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%),
     linear-gradient(360deg, rgba(50, 0, 0, 0.05) 3%, rgba(0, 0, 0, 0) 3%);
   background-position: center center;
   background-size: 20px 20px;
 
   .heading1 {
+    border-color: $primary-color;
     border-width: 1px;
-    @apply relative block h-auto p-2 font-bold text-center text-black border-black border-solid;
+    @apply relative block h-auto p-2 font-bold text-center text-black border-solid;
     &::before {
       top: -0.4rem;
       left: -0.4rem;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid $primary-color;
       content: ' ';
       @apply absolute block w-11/12 h-px;
     }
@@ -27,8 +29,9 @@ $primary-color: #dec6fb;
       margin: 0 0 0 5%;
       overflow: hidden;
       line-height: 3px;
-      background-color: #000;
-      box-shadow: 3px 0 #000, 0 3px #000, -3px 0 #000, 0 -3px #000;
+      background-color: $primary-color;
+      box-shadow: 3px 0 $primary-color, 0 3px $primary-color, -3px 0 $primary-color,
+        0 -3px $primary-color;
     }
 
     .content {
@@ -36,20 +39,14 @@ $primary-color: #dec6fb;
     }
 
     .suffix {
-      display: block;
-      width: 3px;
-      height: 3px;
       margin: 0 0 0 95%;
-      overflow: hidden;
-      line-height: 3px;
-      background-color: #000;
-      box-shadow: 3px 0 #000, 0 3px #000, -3px 0 #000, 0 -3px #000;
+      @extend .prefix;
     }
 
     &::after {
       right: -0.4rem;
       bottom: -0.4rem;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid $primary-color;
       content: ' ';
       @apply absolute block w-11/12 h-px;
     }
@@ -57,7 +54,7 @@ $primary-color: #dec6fb;
 
   h2 {
     display: block;
-    margin: 2rem 1rem;
+    margin: 2rem 0;
     padding-left: 10px;
     color: #595959;
     font-weight: bold;
@@ -71,7 +68,9 @@ $primary-color: #dec6fb;
     font-weight: bold;
     font-size: 16px;
     text-align: center;
+    @apply my-6;
     span {
+      padding: 0.1rem 0.1rem;
       border-bottom: 2px solid #dec6fb;
     }
   }
@@ -99,7 +98,7 @@ $primary-color: #dec6fb;
 
   // blockquote
   .blockquote {
-    @apply p-4 bg-gray-300 border-l-4 border-blue-600;
+    @apply p-4 bg-gray-300 border-l-4 border-blue-400;
     p {
       @apply my-0;
     }
@@ -130,10 +129,12 @@ $primary-color: #dec6fb;
   }
 
   .task_list_parent {
-    @apply p-2 border-blue-500 border-solid border-2;
+    @apply p-2 border-solid;
 
     padding: 2em 2em;
-    border-radius: 2rem;
+    border-color: $primary-color;
+    border-width: 1px;
+    border-radius: 1rem;
 
     .task_list {
       display: flex;
