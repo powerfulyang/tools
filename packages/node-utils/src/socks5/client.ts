@@ -1,6 +1,7 @@
 import { Socket, isIP, isIPv6 } from 'net';
 import { VoidFunction } from '@powerfulyang/utils';
 import { toBuffer } from 'ip';
+import tls from 'tls';
 
 export interface Socks5ClientOptions {
   host?: string;
@@ -8,6 +9,9 @@ export interface Socks5ClientOptions {
   port?: number;
   username?: string;
   password?: string;
+  targetHost: string;
+  targetPort: number;
+  tls?: boolean;
 }
 
 export class Socks5Client extends Socket {
@@ -19,23 +23,37 @@ export class Socks5Client extends Socket {
 
   private readonly password?: string;
 
-  readonly socket = new Socket();
+  socket: Socket;
 
-  constructor(options: Socks5ClientOptions = {}) {
+  private readonly targetHost: string;
+
+  private readonly targetPort: number;
+
+  private readonly tls: boolean;
+
+  constructor(options: Socks5ClientOptions) {
     super();
     const { host, hostname, port, username, password } = options;
     this.hostname = hostname || host?.split(':')[0] || 'localhost';
     this.port = Number(port || host?.split(':')[1] || 1080);
     this.username = username;
     this.password = password;
-    this.proxyConnect();
+    this.targetHost = options.targetHost;
+    this.targetPort = options.targetPort;
+    this.tls = options.tls || false;
+    this.connect();
   }
 
-  proxyConnect() {
-    this.socket.connect(
+  connect() {
+    let servername;
+    if (this.tls) {
+      servername = this.targetHost;
+    }
+    this.socket = tls.connect(
       {
         host: this.hostname,
         port: this.port,
+        servername,
       },
       () => {
         this.authenticate(() => {
@@ -45,6 +63,7 @@ export class Socks5Client extends Socket {
         });
       },
     );
+    return this;
   }
 
   private authenticate(cb: VoidFunction) {
@@ -136,15 +155,16 @@ export class Socks5Client extends Socket {
   }
 
   private addIPv4Section(request: any[]) {
-    request.push(toBuffer(this.hostname));
+    request.push(toBuffer(this.targetHost));
   }
 
   private addIPv6Section(request: any[]) {
-    const bool = isIPv6(this.hostname);
+    const bool = isIPv6(this.targetHost);
     if (!bool) {
       this.socket.emit('error', new Error('IPv6 host parsing failed. Invalid address.'));
     }
-    return request.push(toBuffer(this.hostname));
+    const buffer = toBuffer(this.targetHost);
+    return request.push(...buffer);
   }
 
   private connectToHost(cb: VoidFunction) {
@@ -173,11 +193,11 @@ export class Socks5Client extends Socket {
     request.push(0x01); // Command code: establish a TCP/IP stream connection.
     request.push(0x00); // Reserved - must be 0x00.
 
-    switch (isIP(this.hostname)) {
+    switch (isIP(this.targetHost)) {
       // Add a hostname to the request.
       case 0:
         request.push(0x03);
-        request = request.concat(this.hostname.length, ...Buffer.from(this.hostname));
+        request = request.concat(this.targetHost.length, ...Buffer.from(this.targetHost));
         break;
       // Add an IPv4 address to the request.
       case 4:
@@ -195,7 +215,7 @@ export class Socks5Client extends Socket {
     request.length += 2;
 
     const buffer = Buffer.from(request);
-    buffer.writeUInt16BE(this.port, buffer.length - 2);
+    buffer.writeUInt16BE(this.targetPort, buffer.length - 2);
 
     this.socket.write(buffer);
   }
@@ -210,12 +230,6 @@ export class Socks5Client extends Socket {
     this.socket.on('data', (data) => {
       this.emit('data', data);
     });
-    this.write = this.socket.write;
-    this.read = this.socket.read;
-    this.readable = true;
     this.emit('connect');
-    this.read = this.socket.read;
-    this.write = this.socket.write;
-    this.pipe = this.socket.pipe;
   }
 }
