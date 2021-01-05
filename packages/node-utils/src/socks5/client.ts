@@ -1,7 +1,6 @@
-import { Socket, isIP, isIPv6 } from 'net';
+import { isIP, isIPv6, Socket } from 'net';
 import { VoidFunction } from '@powerfulyang/utils';
 import { toBuffer } from 'ip';
-import tls from 'tls';
 
 export interface Socks5ClientOptions {
   host?: string;
@@ -9,9 +8,11 @@ export interface Socks5ClientOptions {
   port?: number;
   username?: string;
   password?: string;
-  targetHost: string;
-  targetPort: number;
-  tls?: boolean;
+}
+
+export interface CreateConnectionOptions {
+  host: string;
+  port: number;
 }
 
 export class Socks5Client extends Socket {
@@ -23,53 +24,52 @@ export class Socks5Client extends Socket {
 
   private readonly password?: string;
 
-  socket: Socket;
+  private targetHost: string;
 
-  private readonly targetHost: string;
+  private targetPort: number;
 
-  private readonly targetPort: number;
-
-  private readonly tls: boolean;
-
-  constructor(options: Socks5ClientOptions) {
+  constructor(options: Socks5ClientOptions = {}) {
     super();
     const { host, hostname, port, username, password } = options;
     this.hostname = hostname || host?.split(':')[0] || 'localhost';
     this.port = Number(port || host?.split(':')[1] || 1080);
     this.username = username;
     this.password = password;
-    this.targetHost = options.targetHost;
-    this.targetPort = options.targetPort;
-    this.tls = options.tls || false;
-    this.connect();
   }
 
-  connect() {
-    let servername;
-    if (this.tls) {
-      servername = this.targetHost;
-    }
-    this.socket = tls.connect(
+  private socket = new Socket();
+
+  proxyConnect(options: CreateConnectionOptions, onProxy?: VoidFunction) {
+    this.targetHost = options.host;
+    this.targetPort = options.port;
+    this.connect(
       {
         host: this.hostname,
         port: this.port,
-        servername,
       },
       () => {
         this.authenticate(() => {
           this.connectToHost(() => {
             this.onProxy();
+            if (onProxy) {
+              onProxy();
+            }
           });
         });
       },
     );
-    return this;
+    return this.socket.connect({ host: 'localhost', port: 1080 });
+  }
+
+  onProxy() {
+    this.pipe(this.socket);
+    console.log('now is proxying!');
   }
 
   private authenticate(cb: VoidFunction) {
     const authMethods = [0x00];
 
-    this.socket.once('data', (data) => {
+    this.once('data', (data) => {
       let error: string = '';
       if (data.length !== 2) {
         error = 'Unexpected number of bytes received.';
@@ -81,12 +81,12 @@ export class Socks5Client extends Socket {
         error = `Unexpected SOCKS authentication method: ${data[1]}.`;
       }
       if (error) {
-        this.socket.emit('error', new Error(`SOCKS authentication failed. ${error}`));
+        this.emit('error', new Error(`SOCKS authentication failed. ${error}`));
       }
       let request;
       if (data[1] === 0x02) {
         // 需要验证账号密码
-        this.socket.once('data', (data2) => {
+        this.once('data', (data2) => {
           let error2 = '';
 
           if (data2.length !== 2) {
@@ -98,7 +98,7 @@ export class Socks5Client extends Socket {
           }
 
           if (error2) {
-            this.socket.emit('error', new Error(`SOCKS authentication failed. ${error2}`));
+            this.emit('error', new Error(`SOCKS authentication failed. ${error2}`));
           }
         });
 
@@ -110,7 +110,7 @@ export class Socks5Client extends Socket {
           this.password!.length,
           ...Buffer.from(this.password!),
         ];
-        this.socket.write(Buffer.from(request));
+        this.write(Buffer.from(request));
         cb();
       } else {
         cb();
@@ -128,7 +128,7 @@ export class Socks5Client extends Socket {
       buffer[2 + i] = authMethod;
     });
 
-    this.socket.write(buffer);
+    this.write(buffer);
   }
 
   private static getErrorMessage(code: number) {
@@ -161,7 +161,7 @@ export class Socks5Client extends Socket {
   private addIPv6Section(request: any[]) {
     const bool = isIPv6(this.targetHost);
     if (!bool) {
-      this.socket.emit('error', new Error('IPv6 host parsing failed. Invalid address.'));
+      this.emit('error', new Error('IPv6 host parsing failed. Invalid address.'));
     }
     const buffer = toBuffer(this.targetHost);
     return request.push(...buffer);
@@ -170,7 +170,7 @@ export class Socks5Client extends Socket {
   private connectToHost(cb: VoidFunction) {
     let request = [];
 
-    this.socket.once('data', (data) => {
+    this.once('data', (data) => {
       let error;
 
       if (data[0] !== 0x05) {
@@ -182,7 +182,7 @@ export class Socks5Client extends Socket {
       }
 
       if (error) {
-        this.socket.emit('error', new Error(`SOCKS connection failed. ${error}`));
+        this.emit('error', new Error(`SOCKS connection failed. ${error}`));
         return;
       }
 
@@ -217,19 +217,6 @@ export class Socks5Client extends Socket {
     const buffer = Buffer.from(request);
     buffer.writeUInt16BE(this.targetPort, buffer.length - 2);
 
-    this.socket.write(buffer);
-  }
-
-  private onProxy() {
-    this.socket.on('close', (err) => {
-      this.emit('close', err);
-    });
-    this.socket.on('end', () => {
-      this.emit('end');
-    });
-    this.socket.on('data', (data) => {
-      this.emit('data', data);
-    });
-    this.emit('connect');
+    this.write(buffer);
   }
 }
