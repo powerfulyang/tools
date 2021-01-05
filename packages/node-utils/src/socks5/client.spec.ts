@@ -4,14 +4,14 @@ import * as tls from 'tls';
 
 describe('test socks5 client', function () {
   it('authenticate', function (done) {
-    const client = new Socks5Client({
-      hostname: '::1',
+    const client = new Socks5Client();
+    client.createConnection({
       targetHost: 'powerfulyang.com',
       targetPort: 443,
       tls: true,
     });
     client.on('connect', () => {
-      client.socket.write('你好啊');
+      client.socket.write('GET / HTTP/1.1\r\n' + 'Host: powerfulyang.com\r\n\r\n');
     });
     client.on('data', (data) => {
       const serverResponse = data.toString();
