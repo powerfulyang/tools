@@ -1,13 +1,32 @@
 import { AgentFactory } from './Agent';
-import { request } from 'http';
+import { request as httpRequest } from 'http';
+import { request as httpsRequest } from 'https';
 
 describe('test agent', function () {
-  it('https agent', function (done) {
+  it('http agent', function (done) {
     const agent = AgentFactory.create({ type: 'http' });
-    request(
+    httpRequest(
       {
         agent,
-        host: 'twitter.com',
+        host: 'google.com',
+      },
+      (res) => {
+        res.on('data', (data) => {
+          const dataStr = data.toString();
+          expect(dataStr).toBeDefined();
+          done();
+        });
+      },
+    ).end();
+  });
+
+  it('https agent', function (done) {
+    const agent = AgentFactory.create({ type: 'https' });
+    httpsRequest(
+      {
+        agent,
+        host: 'google.com',
+        port: 443,
       },
       (res) => {
         res.on('data', (data) => {

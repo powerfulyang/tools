@@ -1,6 +1,7 @@
 import { isIP, isIPv6, Socket } from 'net';
 import { VoidFunction } from '@powerfulyang/utils';
 import { toBuffer } from 'ip';
+import { EventEmitter } from 'events';
 
 export interface Socks5ClientOptions {
   host?: string;
@@ -15,7 +16,7 @@ export interface CreateConnectionOptions {
   port: number;
 }
 
-export class Socks5Client extends Socket {
+export class Socks5Client extends EventEmitter {
   private readonly hostname: string;
 
   private readonly port: number;
@@ -28,6 +29,28 @@ export class Socks5Client extends Socket {
 
   private targetPort: number;
 
+  socket = new Socket();
+
+  write: any;
+
+  read: any;
+
+  cork: any;
+
+  uncork: any;
+
+  resume: any;
+
+  writable: boolean;
+
+  readable: boolean;
+
+  destroy: any;
+
+  pause: any;
+
+  authorized: any;
+
   constructor(options: Socks5ClientOptions = {}) {
     super();
     const { host, hostname, port, username, password } = options;
@@ -37,12 +60,34 @@ export class Socks5Client extends Socket {
     this.password = password;
   }
 
-  private socket = new Socket();
+  end(data: string | Uint8Array, encoding: (() => void) | undefined) {
+    const ret = this.socket.end(data, encoding);
+    this.writable = this.socket.writable;
+    return ret;
+  }
+
+  destroySoon() {
+    // @ts-ignore
+    const ret = this.socket.destroySoon();
+    this.writable = this.socket.writable;
+    return ret;
+  }
 
   proxyConnect(options: CreateConnectionOptions, onProxy?: VoidFunction) {
     this.targetHost = options.host;
     this.targetPort = options.port;
-    this.connect(
+    this.write = this.socket.write.bind(this.socket);
+    this.on('error', () => {
+      if (!this.socket.destroyed) {
+        this.socket.destroy();
+      }
+    });
+    this.socket.on('error', (error) => {
+      this.emit('error', error);
+    });
+    this.on('end', this.end);
+
+    this.socket.connect(
       {
         host: this.hostname,
         port: this.port,
@@ -50,26 +95,50 @@ export class Socks5Client extends Socket {
       () => {
         this.authenticate(() => {
           this.connectToHost(() => {
-            this.onProxy();
             if (onProxy) {
-              onProxy();
+              onProxy(this.onProxy);
+            } else {
+              this.onProxy();
             }
           });
         });
       },
     );
-    return this.socket.connect({ host: 'localhost', port: 1080 });
+    return this;
   }
 
   onProxy() {
-    this.pipe(this.socket);
-    console.log('now is proxying!');
+    this.cork = this.socket.cork.bind(this.socket);
+    this.uncork = this.socket.uncork.bind(this.socket);
+    this.resume = this.socket.resume.bind(this.socket);
+    this.destroy = this.socket.destroy.bind(this.socket);
+    this.pause = this.socket.pause.bind(this.socket);
+    this.write = this.socket.write.bind(this.socket);
+    this.read = this.socket.read.bind(this.socket);
+    this.socket.on('data', (data) => {
+      this.emit('data', data);
+    });
+
+    this.socket.on('close', (had_error) => {
+      this.emit('close', had_error);
+    });
+
+    this.socket.on('end', () => {
+      this.emit('end');
+    });
+    // @ts-ignore
+    this.socket._httpMessage = this._httpMessage;
+    // @ts-ignore
+    this.socket.parser = this.parser;
+    this.writable = true;
+    this.readable = true;
+    this.emit('connect');
   }
 
   private authenticate(cb: VoidFunction) {
     const authMethods = [0x00];
 
-    this.once('data', (data) => {
+    this.socket.once('data', (data) => {
       let error: string = '';
       if (data.length !== 2) {
         error = 'Unexpected number of bytes received.';
@@ -86,7 +155,7 @@ export class Socks5Client extends Socket {
       let request;
       if (data[1] === 0x02) {
         // 需要验证账号密码
-        this.once('data', (data2) => {
+        this.socket.once('data', (data2) => {
           let error2 = '';
 
           if (data2.length !== 2) {
@@ -170,7 +239,7 @@ export class Socks5Client extends Socket {
   private connectToHost(cb: VoidFunction) {
     let request = [];
 
-    this.once('data', (data) => {
+    this.socket.once('data', (data) => {
       let error;
 
       if (data[0] !== 0x05) {

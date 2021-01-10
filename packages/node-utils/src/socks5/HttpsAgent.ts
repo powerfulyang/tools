@@ -1,10 +1,10 @@
-import { Agent } from 'http';
+import { Agent } from 'https';
 import { connect } from 'tls';
 import { CreateConnectionOptions, Socks5Client } from './client';
 import { AgentOptions } from './HttpAgent';
 
 export class HttpsAgent extends Agent {
-  private socket;
+  private readonly socket;
 
   constructor(options: AgentOptions = {}) {
     super();
@@ -16,12 +16,18 @@ export class HttpsAgent extends Agent {
   }
 
   createConnection(options: CreateConnectionOptions) {
-    this.socket.proxy(options, () => {
-      this.socket = connect({
-        servername: options.host,
-        socket: this.socket,
-      }) as any;
+    return this.socket.proxyConnect(options, (call) => {
+      this.socket.socket = connect(
+        {
+          servername: options.host,
+          socket: this.socket.socket,
+        },
+        () => {
+          // @ts-ignore
+          this.socket.authorized = this.socket.socket.authorized;
+          call.call(this.socket);
+        },
+      );
     });
-    return this.socket;
   }
 }

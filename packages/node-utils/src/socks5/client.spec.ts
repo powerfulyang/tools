@@ -5,10 +5,9 @@ import * as tls from 'tls';
 describe('test socks5 client', function () {
   it('authenticate', function (done) {
     const client = new Socks5Client();
-    client.createConnection({
-      targetHost: 'powerfulyang.com',
-      targetPort: 443,
-      tls: true,
+    client.proxyConnect({
+      host: 'powerfulyang.com',
+      port: 443,
     });
     client.on('connect', () => {
       client.socket.write('GET / HTTP/1.1\r\n' + 'Host: powerfulyang.com\r\n\r\n');
