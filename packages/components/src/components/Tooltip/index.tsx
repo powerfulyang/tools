@@ -1,14 +1,14 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactNode } from 'react';
 import classNames from 'classnames';
 import { useImmer } from '@powerfulyang/hooks';
 import './index.scss';
+import { ReturnTypedFunction } from '@powerfulyang/utils';
 
 type Props = {
-  title?: string;
-  popoverContent?: ReactElement;
+  title?: ReactNode | ReturnTypedFunction<ReactNode>;
 };
 
-export const Tooltip: FC<Props> = ({ children, title, popoverContent }) => {
+export const Tooltip: FC<Props> = ({ children, title }) => {
   const [visible, setVisible] = useImmer(false);
   const [hidden, setHidden] = useImmer(true);
   return (
@@ -38,7 +38,6 @@ export const Tooltip: FC<Props> = ({ children, title, popoverContent }) => {
           <span className="content" />
         </div>
         {title && <div className="title">{title}</div>}
-        {popoverContent}
       </div>
       {children}
     </div>

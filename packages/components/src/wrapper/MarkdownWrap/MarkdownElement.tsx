@@ -2,7 +2,7 @@ import React, { FC, memo, ReactNode, useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark as style } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import classNames from 'classnames';
-import { Icon, IconTag, ShowQrCode, Popover, CurrentPageQrCode } from '@/components';
+import { Icon, IconTag, ShowQrCode, CurrentPageQrCode, Tooltip } from '@/components';
 import './index.scss';
 
 type CodeProps = {
@@ -179,11 +179,11 @@ export const Paragraph: FC<{ node: Node }> = (props) => {
           <span className="post_info_comment">被{viewCount}人临幸</span>
         </span>
         <span className="qrcode">
-          <Popover popoverContent={<CurrentPageQrCode image={avatar} />}>
+          <Tooltip title={<CurrentPageQrCode image={avatar} />}>
             <ShowQrCode>
               <a className="post_info_comment">手机上打开</a>
             </ShowQrCode>
-          </Popover>
+          </Tooltip>
         </span>
       </div>
     );
