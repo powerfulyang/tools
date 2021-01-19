@@ -3,3 +3,4 @@ export * from './isSupportWebp';
 export * from './judgeDevice';
 export * from './scrollToTop';
 export * from './supportWebGL';
+export * from './getElementCenterPoint';
