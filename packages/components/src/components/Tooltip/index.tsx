@@ -1,8 +1,9 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useRef, MouseEvent } from 'react';
 import classNames from 'classnames';
 import { useImmer } from '@powerfulyang/hooks';
 import './index.scss';
-import { ReturnTypedFunction } from '@powerfulyang/utils';
+import { ReturnTypedFunction, getElementCenterPoint } from '@powerfulyang/utils';
+import { PortalWrap } from '@/wrapper/PortalWrap';
 
 type Props = {
   title?: ReactNode | ReturnTypedFunction<ReactNode>;
@@ -10,36 +11,49 @@ type Props = {
 
 export const Tooltip: FC<Props> = ({ children, title }) => {
   const [visible, setVisible] = useImmer(false);
-  const [hidden, setHidden] = useImmer(true);
+  const [tipPosition, setTipPosition] = useImmer({ left: 0, top: 0 });
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const hoverWrap = (e: MouseEvent) => {
+    setVisible(true);
+    const { x, top } = getElementCenterPoint(wrapRef.current!);
+    setTipPosition((draft) => {
+      draft.left = x;
+      draft.top = top;
+    });
+    // 中心点位置
+    console.log(e);
+  };
+
+  const leaveWrap = (e: MouseEvent) => {
+    setVisible(false);
+    console.log(e);
+  };
   return (
-    <div
-      className="wrap"
-      onMouseEnter={() => {
-        setHidden(false);
-        setVisible(true);
-      }}
-      onMouseLeave={() => {
-        setVisible(false);
-      }}
-    >
+    <>
       <div
-        className={classNames('tooltip', {
-          in: visible,
-          fade: !visible,
-          hidden,
-        })}
-        onTransitionEnd={() => {
-          if (!visible) {
-            setHidden(true);
-          }
-        }}
+        onMouseOver={hoverWrap}
+        onMouseOut={leaveWrap}
+        onFocus={() => 0}
+        onBlur={() => 0}
+        ref={wrapRef}
       >
-        <div className="arrow">
-          <span className="content" />
-        </div>
-        {title && <div className="title">{title}</div>}
+        {children}
       </div>
-      {children}
-    </div>
+      <PortalWrap>
+        <div className="wrap" style={tipPosition}>
+          <div
+            className={classNames('tooltip', {
+              in: visible,
+              fade: !visible,
+            })}
+          >
+            <div className="arrow">
+              <span className="content" />
+            </div>
+            {title && <div className="title">{title}</div>}
+          </div>
+        </div>
+      </PortalWrap>
+    </>
   );
 };

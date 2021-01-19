@@ -2,31 +2,24 @@
 
 .wrap {
   $bg: rgba(0, 0, 0, 0.75);
-  @apply relative;
+  @apply absolute;
   * {
     @extend .pointer;
   }
 
+  transform: translateX(-50%) translateY(-100%);
+
   .tooltip {
-    bottom: 100%;
-    left: 50%;
-    margin-top: -1.8rem;
     background-color: $bg;
     border-radius: 2px;
-    transform: translateX(-50%);
-    opacity: 0;
-    @apply absolute opacity-0;
     &.fade {
+      display: none;
       transition: opacity 0.15s linear, transform 0.15s ease-out;
-    }
-
-    &.hidden {
-      width: 0;
-      height: 0;
     }
 
     &.in {
       z-index: 999;
+      display: block;
       opacity: 1;
       transition: opacity 0.2s linear, transform 0.2s ease-in;
     }

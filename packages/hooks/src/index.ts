@@ -1,3 +1,4 @@
+export * from './hooks/useBeforeUnload';
 export * from './hooks/useEffectOnce';
 export * from './hooks/useFavicon';
 export * from './hooks/useFixed';
