@@ -1,8 +1,16 @@
-import React, { FC, ReactNode, useRef, MouseEvent } from 'react';
+import React, {
+  cloneElement,
+  FC,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useRef,
+} from 'react';
 import classNames from 'classnames';
 import { useImmer } from '@powerfulyang/hooks';
 import './index.scss';
-import { ReturnTypedFunction, getElementCenterPoint } from '@powerfulyang/utils';
+import { getElementCenterPoint, ReturnTypedFunction } from '@powerfulyang/utils';
 import { PortalWrap } from '@/wrapper/PortalWrap';
 
 type Props = {
@@ -13,7 +21,7 @@ export const Tooltip: FC<Props> = ({ children, title }) => {
   const [visible, setVisible] = useImmer(false);
   const [tipPosition, setTipPosition] = useImmer({ left: 0, top: 0 });
   const wrapRef = useRef<HTMLDivElement>(null);
-  const hoverWrap = (e: MouseEvent) => {
+  const hoverWrap = useCallback(() => {
     setVisible(true);
     const { x, top } = getElementCenterPoint(wrapRef.current!);
     setTipPosition((draft) => {
@@ -21,39 +29,42 @@ export const Tooltip: FC<Props> = ({ children, title }) => {
       draft.top = top;
     });
     // 中心点位置
-    console.log(e);
-  };
+  }, [setTipPosition, setVisible]);
 
-  const leaveWrap = (e: MouseEvent) => {
+  const leaveWrap = useCallback(() => {
     setVisible(false);
-    console.log(e);
-  };
+  }, [setVisible]);
+
+  const child = useMemo(() => {
+    return React.Children.only(children) as ReactElement;
+  }, [children]);
+
   return (
     <>
-      <div
-        onMouseOver={hoverWrap}
-        onMouseOut={leaveWrap}
-        onFocus={() => 0}
-        onBlur={() => 0}
-        ref={wrapRef}
-      >
-        {children}
-      </div>
-      <PortalWrap>
-        <div className="wrap" style={tipPosition}>
+      {cloneElement(child, {
+        ref: wrapRef,
+        onMouseOver: hoverWrap,
+        onMouseOut: leaveWrap,
+        className: classNames('pointer', child.props.className),
+      })}
+      {visible && (
+        <PortalWrap>
           <div
-            className={classNames('tooltip', {
+            className={classNames('wrap', {
               in: visible,
               fade: !visible,
             })}
+            style={tipPosition}
           >
-            <div className="arrow">
-              <span className="content" />
+            <div className="tooltip">
+              <div className="arrow">
+                <span className="content" />
+              </div>
+              {title && <div className="title">{title}</div>}
             </div>
-            {title && <div className="title">{title}</div>}
           </div>
-        </div>
-      </PortalWrap>
+        </PortalWrap>
+      )}
     </>
   );
 };

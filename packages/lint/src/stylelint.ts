@@ -32,6 +32,7 @@ module.exports = {
           'utilities',
           'screen',
           'layer',
+          'return',
         ],
       },
     ],
