@@ -16,7 +16,6 @@ export * from './hooks/usePageLeave';
 export * from './hooks/usePageQuery';
 export * from './hooks/usePortal';
 export * from './hooks/usePromise';
-export * from './hooks/useQuery';
 export * from './hooks/useRaf';
 export * from './hooks/useRafImmer';
 export * from './hooks/useRafState';
