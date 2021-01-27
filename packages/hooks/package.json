@@ -1,6 +1,6 @@
 {
   "name": "@powerfulyang/hooks",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "util hooks",
   "keywords": [
     "react-hooks"
@@ -34,7 +34,7 @@
     "url": "https://github.com/powerfulyang/tools/issues"
   },
   "devDependencies": {
-    "@powerfulyang/lint": "^0.2.11",
+    "@powerfulyang/lint": "^0.2.12",
     "@testing-library/react-hooks": "^4.0.0",
     "@types/keyboardjs": "^2.5.0",
     "isomorphic-fetch": "^3.0.0",
@@ -43,7 +43,7 @@
     "react-test-renderer": "^17.0.1"
   },
   "dependencies": {
-    "@powerfulyang/utils": "^0.7.13",
+    "@powerfulyang/utils": "^0.7.14",
     "immer": "^8.0.0",
     "keyboardjs": "^2.6.4",
     "qs": "^6.9.4",
