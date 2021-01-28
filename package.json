@@ -2,8 +2,8 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.22.1",
-    "husky": "^4.3.0"
+    "husky": "^4.3.0",
+    "lerna": "^3.22.1"
   },
   "workspaces": [
     "packages/*",
@@ -14,7 +14,7 @@
     "clean": "lerna clean",
     "update": "lerna exec -- ncu -u",
     "bootstrap": "lerna bootstrap",
-    "install": "lerna bootstrap --hoist",
+    "install": "lerna bootstrap --hoist -- --legacy-peer-deps",
     "clean-lock": "lerna exec -- rm -rf package-lock.json",
     "build": "lerna exec --ignore *powerfulyang.com -- npm run build",
     "prettier": "lerna exec -- npm run prettier",
