@@ -10,23 +10,23 @@
 	path = project/admin
 	url = git@github.com:powerfulyang/admin.powerfulyang.com.git
 	branch = master
-[submodule "hooks"]
-	path = packages/hooks
-	url = git@github.com:powerfulyang/hooks.git
-	branch = master
-[submodule "lint"]
-	path = packages/lint
-	url = git@github.com:powerfulyang/lint.git
-	branch = master
-[submodule "utils"]
-	path = packages/utils
-	url = git@github.com:powerfulyang/utils.git
+[submodule "components"]
+	path = packages/components
+	url = git@github.com:powerfulyang/components.git
 	branch = master
 [submodule "node-utils"]
 	path = packages/node-utils
 	url = git@github.com:powerfulyang/node-utils.git
 	branch = master
-[submodule "components"]
-	path = packages/components
-	url = git@github.com:powerfulyang/components.git
+[submodule "utils"]
+	path = packages/utils
+	url = git@github.com:powerfulyang/utils.git
+	branch = master
+[submodule "lint"]
+	path = packages/lint
+	url = git@github.com:powerfulyang/lint.git
+	branch = master
+[submodule "hooks"]
+	path = packages/hooks
+	url = git@github.com:powerfulyang/hooks.git
 	branch = master
