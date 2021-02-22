@@ -1,0 +1,11 @@
+{
+  "npmClient": "npm",
+  "packages": ["packages/*", "project/*"],
+  "command": {
+    "publish": {
+      "npmClient": "npm",
+      "registry": "https://registry.npmjs.org/"
+    }
+  },
+  "version": "independent"
+}
