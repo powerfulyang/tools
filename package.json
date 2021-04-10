@@ -13,7 +13,7 @@
     "to-publish": "lerna publish --no-private",
     "clean": "lerna clean",
     "update": "lerna exec -- ncu -u",
-    "bootstrap": "npm i --legacy-peer-deps",
+    "bootstrap": "lerna bootstrap --hoist",
     "clean-lock": "lerna exec -- rm -rf package-lock.json",
     "build": "lerna exec --ignore *powerfulyang.com -- npm run build",
     "prettier": "lerna exec -- npm run prettier",
