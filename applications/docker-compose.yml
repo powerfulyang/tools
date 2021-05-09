@@ -60,6 +60,9 @@ services:
     command: npm run start:prod
     env_file:
       - ./api.powerfulyang.com/.env
+    deploy:
+      mode: replicated
+      replicas: 4
   powerfulyang.com:
     image: powerfulyang/powerfulyang.com
     container_name: powerfulyang.com
