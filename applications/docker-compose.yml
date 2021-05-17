@@ -1,12 +1,12 @@
-version: '3'
+version: '3.9'
 services:
   nginx:
     image: nginx
     container_name: nginx
     restart: always
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     environment:
       - NGINX_ENTRYPOINT_QUIET_LOGS=1
       - TZ=Asia/Shanghai
@@ -16,19 +16,32 @@ services:
       - ./www/:/usr/share/nginx/www/
       - ./nginx/404.html:/usr/share/nginx/www/404.html
       - ./nginx/conf/:/usr/share/nginx/conf/
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://localhost:12201
   mysql:
     image: mysql
     container_name: mysql
     restart: always
-    ports:
-      - 4856:3306
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: changeme
       MYSQL_DATABASE: test
       TZ: Asia/Shanghai
     command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --explicit_defaults_for_timestamp=true --lower_case_table_names=1 --max_allowed_packet=128M --performance_schema=OFF;
     volumes:
-      - ./mysql/data:/var/lib/mysql
+      - /data/volumes/mysql:/var/lib/mysql
+  pg:
+    image: postgres
+    container_name: pg
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: changeme
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - /data/volumes/pg:/var/lib/postgresql/data
   rabbitmq:
     image: rabbitmq
     container_name: rabbitmq
@@ -52,10 +65,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
   api.powerfulyang.com:
     image: powerfulyang/api.powerfulyang.com
-    container_name: api.powerfulyang.com
     volumes:
-      - ./api.powerfulyang.com/assets:/usr/app/assets
-      - ./api.powerfulyang.com/.cookies:/usr/app/.cookies
+      - /data/volumes/api.powerfulyang.com/assets:/usr/app/api.powerfulyang.com/assets
+      - /data/volumes/api.powerfulyang.com/.cookies:/usr/app/api.powerfulyang.com/.cookies
     restart: always
     command: npm run start:prod
     env_file:
@@ -63,6 +75,10 @@ services:
     deploy:
       mode: replicated
       replicas: 4
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://localhost:12201
   powerfulyang.com:
     image: powerfulyang/powerfulyang.com
     container_name: powerfulyang.com
@@ -70,12 +86,113 @@ services:
     command: npm run start
     env_file:
       - ./powerfulyang.com/.env
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://localhost:12201
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    image: elastic/elasticsearch:8.1.0
     container_name: elasticsearch
     restart: always
     environment:
       - discovery.type=single-node
     volumes:
-      - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - /data/volumes/elasticsearch/data:/usr/share/elasticsearch/data
+  dev.elasticsearch:
+    image: elastic/elasticsearch:8.1.0
+    container_name: dev.elasticsearch
+    ports:
+      - "58210:9200"
+    restart: always
+    environment:
+      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+      discovery.type: single-node
+      ELASTIC_PASSWORD: changeme
+    volumes:
+      - './dev/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml'
+      - '/data/volumes/elasticsearch-dev/data:/usr/share/elasticsearch/data'
+  dev.logstash:
+    image: elastic/logstash:8.1.0
+    container_name: dev.logstash
+    ports:
+      - "12201:12201/udp"
+    restart: always
+    environment:
+      LS_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+    volumes:
+      - './dev/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf'
+      - './dev/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml'
+  dev.kibana:
+    image: elastic/kibana:8.1.0
+    container_name: dev.kibana
+    restart: always
+    volumes:
+      - './dev/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml'
+  dev.redis:
+    image: redis
+    container_name: dev.redis
+    command: redis-server --requirepass changeme
+    ports:
+      - "58211:6379"
+    restart: always
+  dev.rabbitmq:
+    image: rabbitmq
+    container_name: dev.rabbitmq
+    ports:
+      - "58212:5672"
+    restart: always
+  dev.pg:
+    image: postgres
+    container_name: dev.pg
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: changeme
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "56782:5432"
+    volumes:
+      - /data/volumes/dev.pg:/var/lib/postgresql/data
+  qa.api.powerfulyang.com:
+    image: powerfulyang/qa.api.powerfulyang.com
+    volumes:
+      - /data/volumes/qa.api.powerfulyang.com/assets:/usr/app/api.powerfulyang.com/assets
+      - /data/volumes/qa.api.powerfulyang.com/.cookies:/usr/app/api.powerfulyang.com/.cookies
+    restart: always
+    command: npm run start:prod
+    container_name: qa.api.powerfulyang.com
+    env_file:
+      - ./qa.api.powerfulyang.com/.env
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://localhost:12201
+  qa.powerfulyang.com:
+    image: powerfulyang/qa.powerfulyang.com
+    container_name: qa.powerfulyang.com
+    restart: always
+    command: npm run start
+    env_file:
+      - ./qa.powerfulyang.com/.env
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://localhost:12201
+  vpn:
+    image: hwdsl2/ipsec-vpn-server
+    container_name: vpn
+    restart: always
+    ports:
+      - "500:500/udp"
+      - "4500:4500/udp"
+    privileged: true #
+    volumes:
+      - "/data/ikev2-vpn-data:/etc/ipsec.d"
+      - "/lib/modules:/lib/modules:ro"
+    environment:
+      VPN_IPSEC_PSK: changeme
+      VPN_USER: changeme
+      VPN_PASSWORD: changeme
+
+
+
 

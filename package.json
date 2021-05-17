@@ -1,41 +1,8 @@
 {
   "name": "root",
   "private": true,
-  "devDependencies": {
-    "husky": "^4.3.0",
-    "lerna": "^3.22.1"
-  },
   "workspaces": [
     "packages/*",
     "project/*"
-  ],
-  "scripts": {
-    "to-publish": "lerna publish --no-private",
-    "clean": "lerna clean",
-    "update": "lerna exec -- ncu -u",
-    "bootstrap": "lerna bootstrap --hoist",
-    "clean-lock": "lerna exec -- rm -rf package-lock.json",
-    "build": "lerna exec --ignore *powerfulyang.com -- npm run build",
-    "prettier": "lerna exec -- npm run prettier",
-    "lint": "lerna exec -- npm run lint",
-    "watch:hooks": "lerna exec --scope @powerfulyang/hooks -- npm run watch:build",
-    "build:hooks": "lerna exec --scope @powerfulyang/hooks -- npm run build",
-    "watch:utils": "lerna exec --scope @powerfulyang/utils -- npm run watch:build",
-    "build:utils": "lerna exec --scope @powerfulyang/utils -- npm run build",
-    "build:lint": "lerna exec --scope @powerfulyang/lint -- npm run build",
-    "build:node-utils": "lerna exec --scope @powerfulyang/node-utils -- npm run build",
-    "start:dev:api": "lerna exec --scope api.powerfulyang.com -- npm run start:dev",
-    "start:dev:admin": "lerna exec --scope admin.powerfulyang.com -- npm run start:dev",
-    "start:dev:home": "lerna exec --scope powerfulyang.com -- npm run start:dev",
-    "watch:components": "lerna exec --scope @powerfulyang/components -- npm run watch:build",
-    "build:components": "lerna exec --scope @powerfulyang/components -- npm run build",
-    "fix:components:style": "lerna exec --scope @powerfulyang/components -- npm run fix:style",
-    "fix:home:style": "lerna exec --scope powerfulyang.com -- npm run fix:style",
-    "precommit": "npm run prettier && npm run lint && npm run fix:components:style"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run precommit"
-    }
-  }
+  ]
 }
