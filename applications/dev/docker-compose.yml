@@ -12,15 +12,18 @@ services:
       - ELASTIC_PASSWORD=mD749g97joQPaFM
       - xpack.security.enabled=true
     ports:
-      - 59200:9200
+      - "59200:9200"
+    restart: always
   redis:
     image: redis
     container_name: redis
     command: redis-server --requirepass mD749g97joQPaFM
     ports:
-      - 46379:6379
+      - "46379:6379"
+    restart: always
   rabbitmq:
     image: rabbitmq
     container_name: rabbitmq
     ports:
-      - 35672:5672
+      - "35672:5672"
+    restart: always
