@@ -10,7 +10,7 @@
     "project/*"
   ],
   "scripts": {
-    "to-publish": "lerna publish --no-private",
+    "to-publish": "lerna publish --no-git-tag-version --no-private",
     "clean": "lerna clean",
     "update": "lerna exec -- ncu -u",
     "bootstrap": "lerna bootstrap --hoist",
