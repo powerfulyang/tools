@@ -15,6 +15,7 @@
     "update": "lerna exec -- ncu -u",
     "bootstrap": "lerna bootstrap --hoist",
     "clean-lock": "lerna exec -- rm -rf package-lock.json",
+    "install:packages": "lerna exec --ignore *powerfulyang.com -- npm i",
     "build": "lerna exec --ignore *powerfulyang.com -- npm run build",
     "prettier": "lerna exec -- npm run prettier",
     "lint": "lerna exec -- npm run lint",
