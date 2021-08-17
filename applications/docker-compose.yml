@@ -25,7 +25,7 @@ services:
     container_name: mysql
     restart: always
     ports:
-      - "4856:3306"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: test
@@ -89,35 +89,46 @@ services:
       - discovery.type=single-node
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data
-  dev_elk:
-    image: sebp/elk
-    container_name: dev_elk
-    restart: always
+  dev.elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+    container_name: dev.elasticsearch
     ports:
-      - '9200:9200'
-      - '12201:12201/udp'
+      - "9200:9200"
+    restart: always
     environment:
-      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
-      - bootstrap.memory_lock=true
-      - discovery.type=single-node
-      - ELASTIC_USERNAME=elastic
-      - ELASTIC_PASSWORD=mD749g97joQPaFM
-      - xpack.security.enabled=true
+      ES_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+      discovery.type: single-node
+      ELASTIC_PASSWORD: mD749g97joQPaFM
     volumes:
-      - './dev_conf/logstash:/etc/logstash/conf.d'
-    healthcheck:
-      test: [ 'CMD-SHELL', 'curl --fail localhost:9200/_cluster/health || kill 1' ]
-      interval: 60s
-  dev_redis:
+      - './dev/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml'
+  dev.logstash:
+    image: docker.elastic.co/logstash/logstash:7.14.0
+    container_name: dev.logstash
+    ports:
+      - "12201:12201/udp"
+    restart: always
+    environment:
+      LS_JAVA_OPTS: "-Xmx1024m -Xms1024m"
+    volumes:
+      - './dev/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf'
+      - './dev/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml'
+  dev.kibana:
+    image: docker.elastic.co/kibana/kibana:7.14.0
+    container_name: dev.kibana
+    restart: always
+    volumes:
+      - './dev/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml'
+  dev.redis:
     image: redis
-    container_name: dev_redis
+    container_name: dev.redis
     command: redis-server --requirepass mD749g97joQPaFM
     ports:
       - "6379:6379"
     restart: always
-  dev_rabbitmq:
+  dev.rabbitmq:
     image: rabbitmq
-    container_name: dev_rabbitmq
+    container_name: dev.rabbitmq
     ports:
       - "5672:5672"
     restart: always
+
