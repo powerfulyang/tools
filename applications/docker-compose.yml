@@ -97,6 +97,8 @@ services:
       - '9200:9200'
       - '12201:12201/udp'
     environment:
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - bootstrap.memory_lock=true
       - discovery.type=single-node
       - ELASTIC_USERNAME=elastic
       - ELASTIC_PASSWORD=mD749g97joQPaFM
