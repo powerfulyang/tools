@@ -1,10 +1,18 @@
 {
-  "npmClient": "npm",
-  "packages": ["packages/*", "project/*"],
+  "npmClient": "pnpm",
+  "packages": [
+    "packages/*",
+    "project/*"
+  ],
   "command": {
     "publish": {
       "npmClient": "npm",
       "registry": "https://registry.npmjs.org/"
+    },
+    "bootstrap": {
+      "npmClient": "pnpm",
+      "registry": "https://registry.npmjs.org/",
+      "hoist": true
     }
   },
   "version": "independent"

@@ -1,21 +1,16 @@
 {
   "name": "root",
   "private": true,
-  "devDependencies": {
-    "husky": "^6.0.0",
-    "lerna": "^4.0.0"
-  },
   "workspaces": [
     "packages/*",
     "project/*"
   ],
   "scripts": {
     "to-publish": "lerna publish --no-git-tag-version --no-private",
-    "clean": "lerna clean",
     "update": "lerna exec -- ncu -u",
-    "bootstrap": "lerna bootstrap --hoist",
-    "clean-lock": "lerna exec -- rm -rf package-lock.json",
-    "install:packages": "lerna exec --ignore *powerfulyang.com -- npm i",
+    "show-changed": "lerna changed",
+    "generate-lockfile": "lerna exec -- npm install --package-lock-only --legacy-peer-deps",
+    "audit": "lerna exec -- npm audit fix",
     "build": "lerna exec --ignore *powerfulyang.com -- npm run build",
     "prettier": "lerna exec -- npm run prettier",
     "lint": "lerna exec -- npm run lint",
