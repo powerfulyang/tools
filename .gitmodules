@@ -6,10 +6,6 @@
 	path = project/home
 	url = git@github.com:powerfulyang/powerfulyang.com.git
 	branch = master
-[submodule "admin"]
-	path = project/admin
-	url = git@github.com:powerfulyang/admin.powerfulyang.com.git
-	branch = master
 [submodule "components"]
 	path = packages/components
 	url = git@github.com:powerfulyang/components.git

@@ -1,19 +1,9 @@
 
 # Clone
 
-`git clone --recurse-submodules git@github.com:powerfulyang/tools.git`
+1. `git clone --recurse-submodules git@github.com:powerfulyang/tools.git`
+2. `git submodule foreach git checkout master`
 
-or
-
-`git clone git@github.com:powerfulyang/tools.git`
-
-`gitsubmodule init`
-
-`git submodule update`
-
-or
-
-`git submodule update --init --recursive`
 
 
 # Install `lerna` and `pnpm`
