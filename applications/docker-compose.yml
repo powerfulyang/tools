@@ -113,7 +113,7 @@ services:
       - './dev/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf'
       - './dev/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml'
   dev.kibana:
-    image: docker.elastic.co/kibana/kibana:7.14.0
+    image: docker.elastic.co/kibana/kibana:8.1.2
     container_name: dev.kibana
     restart: always
     volumes:
