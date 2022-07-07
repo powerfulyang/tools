@@ -91,7 +91,7 @@ services:
       options:
         gelf-address: udp://localhost:12201
   elasticsearch:
-    image: elastic/elasticsearch:8.3.1
+    image: elastic/elasticsearch:8.3.2
     container_name: elasticsearch
     restart: always
     environment:
@@ -99,7 +99,7 @@ services:
     volumes:
       - /data/volumes/elasticsearch/data:/usr/share/elasticsearch/data
   dev.elasticsearch:
-    image: elastic/elasticsearch:8.3.1
+    image: elastic/elasticsearch:8.3.2
     container_name: dev.elasticsearch
     ports:
       - "58210:9200"
