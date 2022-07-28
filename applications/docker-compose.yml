@@ -112,7 +112,7 @@ services:
       - './dev/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml'
       - '/data/volumes/elasticsearch-dev/data:/usr/share/elasticsearch/data'
   dev.logstash:
-    image: elastic/logstash:8.3.2
+    image: elastic/logstash:8.3.3
     container_name: dev.logstash
     ports:
       - "12201:12201/udp"
