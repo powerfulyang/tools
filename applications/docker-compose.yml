@@ -123,7 +123,7 @@ services:
       - './dev/logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf'
       - './dev/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml'
   dev.kibana:
-    image: elastic/kibana:8.3.2
+    image: elastic/kibana:8.3.3
     container_name: dev.kibana
     restart: always
     volumes:
