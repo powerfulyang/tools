@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "bootstrap": "pnpm install --shamefully-hoist",
     "clean": "lerna clean -y && rm -rf node_modules",
     "build": "lerna exec -- npm run build",
     "lint": "lerna exec -- npm run lint:js"
