@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "clean": "lerna clean -y && rm -rf node_modules",
-    "build": "lerna exec -- npm run build",
-    "lint": "lerna exec -- npm run lint:js"
+    "build:utils": "lerna exec --scope @powerfulyang/utils -- pnpm run build",
+    "build:hooks": "lerna exec --scope @powerfulyang/hooks -- pnpm run build",
+    "prebuild": "pnpm run build:utils && pnpm run build:hooks",
+    "build": "lerna exec --scope @powerfulyang/* --ignore @powerfulyang/utils --ignore @powerfulyang/hooks --stream  -- pnpm run build",
+    "lint": "lerna exec -- pnpm run lint:js"
   },
   "devDependencies": {
     "lerna": "5.5.0"
