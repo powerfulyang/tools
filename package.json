@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "clean": "lerna clean -y && rm -rf node_modules",
+    "clean": "lerna clean -y && rimraf node_modules",
+    "build:lint": "lerna exec --scope @powerfulyang/lint -- pnpm run build",
     "build:utils": "lerna exec --scope @powerfulyang/utils -- pnpm run build",
     "build:hooks": "lerna exec --scope @powerfulyang/hooks -- pnpm run build",
-    "prebuild": "pnpm run build:utils && pnpm run build:hooks",
-    "build": "lerna exec --scope @powerfulyang/* --ignore @powerfulyang/utils --ignore @powerfulyang/hooks --stream  -- pnpm run build",
+    "prebuild": "pnpm run build:lint && pnpm run build:utils && pnpm run build:hooks",
+    "build": "lerna exec --scope @powerfulyang/node-utils --scope @powerfulyang/components --stream  -- pnpm run build",
     "lint": "lerna exec -- pnpm run lint:js"
   },
   "devDependencies": {
