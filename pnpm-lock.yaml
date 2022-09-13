@@ -238,8 +238,8 @@ importers:
       '@powerfulyang/utils': 1.5.0
       '@types/node-fetch': 2.6.2
       '@types/node-telegram-bot-api': 0.57.1
-      '@types/nodemailer': 6.4.5
-      '@types/passport': 1.0.10
+      '@types/nodemailer': 6.4.6
+      '@types/passport': 1.0.11
       '@types/passport-github': 1.1.7
       '@types/passport-google-oauth20': 2.0.11
       '@types/passport-jwt': 3.0.6
@@ -337,8 +337,8 @@ importers:
       '@powerfulyang/lint': link:../../packages/lint
       '@types/node-fetch': 2.6.2
       '@types/node-telegram-bot-api': 0.57.1
-      '@types/nodemailer': 6.4.5
-      '@types/passport': 1.0.10
+      '@types/nodemailer': 6.4.6
+      '@types/passport': 1.0.11
       '@types/passport-github': 1.1.7
       '@types/passport-google-oauth20': 2.0.11
       '@types/passport-jwt': 3.0.6
@@ -5099,14 +5099,14 @@ packages:
   /@types/node-fetch/2.6.2:
     resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
-      '@types/node': 18.7.16
+      '@types/node': 18.7.17
       form-data: 3.0.1
     dev: true
 
   /@types/node-telegram-bot-api/0.57.1:
     resolution: {integrity: sha512-6jzAtxFPnCcnTLFw6UaCs3552eiC46krxH7KTZl0aJ1gB5A5z3oiaqrY3ZO9/A5qpVA6bZoU/QmriZ37JXsePw==}
     dependencies:
-      '@types/node': 18.7.16
+      '@types/node': 18.7.17
       '@types/request': 2.48.8
     dev: true
 
@@ -5114,17 +5114,13 @@ packages:
     resolution: {integrity: sha512-CK2fnrQlIgKlCV3N2kM+Gznb5USlwA1KFX3rJVHmgVk6NJxFPuQ86pAcvKnu37IA4BGlSRz7sEE1lHL1aLZ/eQ==}
     dev: false
 
-  /@types/node/18.7.16:
-    resolution: {integrity: sha512-EQHhixfu+mkqHMZl1R2Ovuvn47PUw18azMJOTwSZr9/fhzHNGXAJ0ma0dayRVchprpCj0Kc1K1xKoWaATWF1qg==}
-    dev: true
-
   /@types/node/18.7.17:
     resolution: {integrity: sha512-0UyfUnt02zIuqp7yC8RYtDkp/vo8bFaQ13KkSEvUAohPOAlnVNbj5Fi3fgPSuwzakS+EvvnnZ4x9y7i6ASaSPQ==}
 
-  /@types/nodemailer/6.4.5:
-    resolution: {integrity: sha512-zuP3nBRQHI6M2PkXnGGy1Ww4VB+MyYHGgnfV2T+JR9KLkeWqPJuyVUgLpKXuFnA/b7pZaIDFh2sV4759B7jK1g==}
+  /@types/nodemailer/6.4.6:
+    resolution: {integrity: sha512-pD6fL5GQtUKvD2WnPmg5bC2e8kWCAPDwMPmHe/ohQbW+Dy0EcHgZ2oCSuPlWNqk74LS5BVMig1SymQbFMPPK3w==}
     dependencies:
-      '@types/node': 18.7.16
+      '@types/node': 18.7.17
     dev: true
 
   /@types/normalize-package-data/2.4.1:
@@ -5143,7 +5139,7 @@ packages:
     resolution: {integrity: sha512-CCBwZyBRy3fLOd96Idn00TLHMDXZIzUGXq+gSvB70h8k4j61dkbZCI6m5ZauL+hLdyJur7Z94tdfd8DBjFA0og==}
     dependencies:
       '@types/express': 4.17.13
-      '@types/passport': 1.0.10
+      '@types/passport': 1.0.11
       '@types/passport-oauth2': 1.4.11
     dev: true
 
@@ -5151,7 +5147,7 @@ packages:
     resolution: {integrity: sha512-9XMT1GfwhZL7UQEiCepLef55RNPHkbrCtsU7rsWPTEOsmu5qVIW8nSemtB4p+P24CuOhA+IKkv8LsPThYghGww==}
     dependencies:
       '@types/express': 4.17.13
-      '@types/passport': 1.0.10
+      '@types/passport': 1.0.11
       '@types/passport-oauth2': 1.4.11
     dev: true
 
@@ -5168,18 +5164,18 @@ packages:
     dependencies:
       '@types/express': 4.17.13
       '@types/oauth': 0.9.1
-      '@types/passport': 1.0.10
+      '@types/passport': 1.0.11
     dev: true
 
   /@types/passport-strategy/0.2.35:
     resolution: {integrity: sha512-o5D19Jy2XPFoX2rKApykY15et3Apgax00RRLf0RUotPDUsYrQa7x4howLYr9El2mlUApHmCMv5CZ1IXqKFQ2+g==}
     dependencies:
       '@types/express': 4.17.13
-      '@types/passport': 1.0.10
+      '@types/passport': 1.0.11
     dev: true
 
-  /@types/passport/1.0.10:
-    resolution: {integrity: sha512-IZamnXuN7mY+2/v8bAW6nuTcKiay7gXBBcMBZ8n7YHB4u5DwsWoJaNrHdAQ8PZEODRjCv3oHOg76CYJ40j9RqA==}
+  /@types/passport/1.0.11:
+    resolution: {integrity: sha512-pz1cx9ptZvozyGKKKIPLcVDVHwae4hrH5d6g5J+DkMRRjR3cVETb4jMabhXAUbg3Ov7T22nFHEgaK2jj+5CBpw==}
     dependencies:
       '@types/express': 4.17.13
     dev: true
@@ -5262,7 +5258,7 @@ packages:
   /@types/sharp/0.30.5:
     resolution: {integrity: sha512-EhO29617AIBqxoVtpd1qdBanWpspk/kD2B6qTFRJ31Q23Rdf+DNU1xlHSwtqvwq1vgOqBwq1i38SX+HGCymIQg==}
     dependencies:
-      '@types/node': 18.7.16
+      '@types/node': 18.7.17
     dev: true
 
   /@types/stack-utils/2.0.1:
@@ -5298,7 +5294,7 @@ packages:
   /@types/xml2js/0.4.11:
     resolution: {integrity: sha512-JdigeAKmCyoJUiQljjr7tQG3if9NkqGUgwEUqBvV0N7LM4HyQk7UXCnusRa1lnvXAEYJ8mw8GtZWioagNztOwA==}
     dependencies:
-      '@types/node': 18.7.16
+      '@types/node': 18.7.17
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -9389,7 +9385,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.5
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: true
@@ -17700,11 +17696,11 @@ packages:
   /yargs-parser/21.0.1:
     resolution: {integrity: sha512-9BK1jFpLzJROCI5TzwZL/TU4gqjK5xiHV/RfWLOahrjAko/e4DJkRDZQXfvqAsiZzzYhgAzbgz6lg48jcm4GLg==}
     engines: {node: '>=12'}
+    dev: true
 
   /yargs-parser/21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
-    dev: true
 
   /yargs/15.4.1:
     resolution: {integrity: sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==}
@@ -17745,7 +17741,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 21.0.1
+      yargs-parser: 21.1.1
 
   /yn/3.1.1:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
