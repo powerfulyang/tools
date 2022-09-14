@@ -62,6 +62,7 @@ importers:
       '@rollup/plugin-typescript': 8.5.0
       '@testing-library/react': 13.4.0
       immer: '*'
+      lodash-es: '*'
       react: '*'
       react-dom: '*'
       rxjs: '*'
@@ -69,6 +70,7 @@ importers:
     dependencies:
       '@powerfulyang/utils': link:../utils
       immer: 9.0.15
+      lodash-es: 4.17.21
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       rxjs: 7.5.6
@@ -373,8 +375,10 @@ importers:
       framer-motion: 7.3.4
       hast-util-to-string: 2.0.0
       immer: 9.0.15
+      jest-canvas-mock: latest
       jotai: 1.8.3
       lodash-es: 4.17.21
+      lottie-react: 2.3.1
       monaco-editor: 0.34.0
       next: 12.3.0
       next-compose-plugins: 2.2.1
@@ -420,6 +424,7 @@ importers:
       immer: 9.0.15
       jotai: 1.8.3_bgdli2pd6zodwqnwqsgwbmub5e
       lodash-es: 4.17.21
+      lottie-react: 2.3.1_biqbaboplfbrettd7655fr4n2y
       monaco-editor: 0.34.0
       next: 12.3.0_vyk55zyolcaieh7zfm7nf7uva4
       next-sitemap: 3.1.22_oft4srhikjzureldvsn5mwkski
@@ -453,6 +458,7 @@ importers:
       '@types/ramda': 0.28.15
       '@types/react-syntax-highlighter': 15.5.5
       '@types/sharp': 0.30.5
+      jest-canvas-mock: 2.4.0
       next-compose-plugins: 2.2.1
       next-pwa: 5.6.0_pxjxqjzfh2g4zjxqnppgm5m7ei
       prettier-plugin-tailwindcss: 0.1.13_prettier@2.7.1
@@ -7294,6 +7300,10 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
+  /cssfontparser/1.2.1:
+    resolution: {integrity: sha512-6tun4LoZnj7VN6YeegOVb67KBX/7JJsqvj+pv3ZA7F878/eN33AbGa5b/S/wXxS/tcp8nc40xRUrsPlxIyNUPg==}
+    dev: true
+
   /cssnano-preset-default/5.2.12_postcss@8.4.16:
     resolution: {integrity: sha512-OyCBTZi+PXgylz9HAA5kHyoYhfGcYdwFmyaJzWnzxuGRtnMw/kR6ilW9XzlzlRAtB6PLT/r+prYgkef7hngFew==}
     engines: {node: ^10 || ^12 || >=14.0}
@@ -10458,6 +10468,13 @@ packages:
       minimatch: 3.1.2
     dev: true
 
+  /jest-canvas-mock/2.4.0:
+    resolution: {integrity: sha512-mmMpZzpmLzn5vepIaHk5HoH3Ka4WykbSoLuG/EKoJd0x0ID/t+INo1l8ByfcUJuDM+RIsL4QDg/gDnBbrj2/IQ==}
+    dependencies:
+      cssfontparser: 1.2.1
+      moo-color: 1.0.3
+    dev: true
+
   /jest-changed-files/29.0.0:
     resolution: {integrity: sha512-28/iDMDrUpGoCitTURuDqUzWQoWmOmOKOFST1mi2lwh62X4BFf6khgH3uSuo1e49X/UDjuApAj3w0wLOex4VPQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -11559,6 +11576,21 @@ packages:
     dependencies:
       js-tokens: 4.0.0
 
+  /lottie-react/2.3.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-8cxd6XZZtECT6LoAhCftRdYrEpHxiouvB5EPiYA+TtCG5LHNYAdMS9IVIHcxKtWnpo7x16QfCLj1XLXZpaN81A==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      lottie-web: 5.9.6
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /lottie-web/5.9.6:
+    resolution: {integrity: sha512-JFs7KsHwflugH5qIXBpB4905yC1Sub2MZWtl/elvO/QC6qj1ApqbUZJyjzJseJUtVpgiDaXQLjBlIJGS7UUUXA==}
+    dev: false
+
   /lowlight/1.20.0:
     resolution: {integrity: sha512-8Ktj+prEb1RoCPkEOrPMYUN/nCggB7qAWe3a7OpMjWQkh3l2RD5wKRQ+o8Q8YuI9RG/xs95waaI/E6ym/7NsTw==}
     dependencies:
@@ -12360,6 +12392,12 @@ packages:
   /monaco-editor/0.34.0:
     resolution: {integrity: sha512-VF+S5zG8wxfinLKLrWcl4WUizMx+LeJrG4PM/M78OhcwocpV0jiyhX/pG6Q9jIOhrb/ckYi6nHnaR5OojlOZCQ==}
     dev: false
+
+  /moo-color/1.0.3:
+    resolution: {integrity: sha512-i/+ZKXMDf6aqYtBhuOcej71YSlbjT3wCO/4H1j8rPvxDJEifdwgg5MaFyu6iYAT8GBZJg2z0dkgK4YMzvURALQ==}
+    dependencies:
+      color-name: 1.1.4
+    dev: true
 
   /mri/1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
@@ -17644,11 +17682,11 @@ packages:
   /yargs-parser/21.0.1:
     resolution: {integrity: sha512-9BK1jFpLzJROCI5TzwZL/TU4gqjK5xiHV/RfWLOahrjAko/e4DJkRDZQXfvqAsiZzzYhgAzbgz6lg48jcm4GLg==}
     engines: {node: '>=12'}
+    dev: true
 
   /yargs-parser/21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
-    dev: true
 
   /yargs/15.4.1:
     resolution: {integrity: sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==}
@@ -17689,7 +17727,7 @@ packages:
       require-directory: 2.1.1
       string-width: 4.2.3
       y18n: 5.0.8
-      yargs-parser: 21.0.1
+      yargs-parser: 21.1.1
 
   /yn/3.1.1:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
