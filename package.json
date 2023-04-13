@@ -9,13 +9,26 @@
     "build:hooks": "lerna exec --scope @powerfulyang/hooks -- pnpm run build",
     "prebuild": "pnpm run build:lint && pnpm run build:utils && pnpm run build:hooks",
     "build": "lerna exec --scope @powerfulyang/node-utils --scope @powerfulyang/components --stream  -- pnpm run build",
-    "lint": "lerna exec -- pnpm run lint:js"
-  },
-  "devDependencies": {
-    "lerna": "5.6.2"
+    "lint": "lerna exec -- pnpm run lint:js",
+    "turbo:build": "turbo run build",
+    "manypkg:check": "manypkg check"
   },
   "workspaces": [
     "packages/*",
     "project/*"
-  ]
+  ],
+  "dependencies": {
+    "@changesets/cli": "2.26.1",
+    "@manypkg/cli": "0.20.0",
+    "lerna": "6.6.1",
+    "turbo": "1.9.1"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "18",
+        "react-dom": "18"
+      }
+    }
+  }
 }
