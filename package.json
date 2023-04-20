@@ -5,7 +5,8 @@
   "scripts": {
     "clean": "lerna clean -y && rimraf node_modules",
     "turbo:build": "turbo run build --filter @powerfulyang/*",
-    "manypkg:check": "manypkg check"
+    "manypkg:check": "manypkg check",
+    "home:qa:dev": "lerna exec --scope powerfulyang.com -- pnpm run qa:dev"
   },
   "workspaces": [
     "packages/*",
@@ -15,7 +16,7 @@
     "@changesets/cli": "2.26.1",
     "@manypkg/cli": "0.20.0",
     "lerna": "6.6.1",
-    "turbo": "1.9.1"
+    "turbo": "1.9.3"
   },
   "pnpm": {
     "peerDependencyRules": {
