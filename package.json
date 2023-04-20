@@ -5,7 +5,8 @@
   "scripts": {
     "clean": "lerna clean -y && rimraf node_modules",
     "turbo:build": "turbo run build --filter @powerfulyang/*",
-    "manypkg:check": "manypkg check"
+    "manypkg:check": "manypkg check",
+    "home:qa:dev": "lerna exec --scope powerfulyang.com -- pnpm run qa:dev"
   },
   "workspaces": [
     "packages/*",
